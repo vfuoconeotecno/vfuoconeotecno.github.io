@@ -124,18 +124,14 @@ body::-webkit-scrollbar {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: auto;
-    padding: 20px;
-    transition: all 0.6s ease;
-    height: 100%;
+    width: 100%;
+    min-height: 100vh;
+    padding: 2vw;
 }
 
 .skins-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-    width: 100%;
+    gap: 3vh;
+    width: 90%;
 }
 
 .player-row {
@@ -148,22 +144,23 @@ body::-webkit-scrollbar {
 }
 
 .skin-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
     padding: 15px;
-    border-radius: 15px;
-    min-width: 220px;
-    border: 2px solid transparent;
-    transition: all 0.4s ease;
+    width: clamp(220px, 30vw, 500px);
+    overflow: hidden;
+    transition: all 0.3s ease;
 }
 
 .skin-img {
-    height: 300px;
-    image-rendering: pixelated;
     display: block;
     margin: 0 auto;
     filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
     cursor: pointer;
     transition: all 0.3s ease;
+    height: clamp(200px, 40vh, 450px);
 }
 
 .skin-img:hover {
@@ -173,10 +170,12 @@ body::-webkit-scrollbar {
 
 .skin-card p {
     margin: 0 0 15px 0;
-    font-size: 2rem;
     font-weight: bold;
     color: #ffffff;
     letter-spacing: 1px;
+    font-size: clamp(1.5rem, 2.5vw, 3rem);
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .player-row.active .skin-card {
@@ -206,9 +205,9 @@ body::-webkit-scrollbar {
 
 .medals-grid {
     display: grid;
-    grid-template-columns: repeat(3, 420px); 
-    gap: 20px;
-    flex-wrap: wrap; 
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 2vw;
+    width: 100%;
 }
 
 .medal-item {
@@ -238,9 +237,8 @@ body::-webkit-scrollbar {
 }
 
 .medal-item img {
-    width: 60px;
+    width: clamp(40px, 5vw, 80px); 
     height: auto;
-    object-fit: contain;
 }
 
 p.gold, p.silver, p.bronze {

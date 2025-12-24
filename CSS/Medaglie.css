@@ -1,16 +1,15 @@
 body { 
     font-family: 'Montserrat', sans-serif; 
-    font-size: 22px; 
     margin: 0;
-    display: block;
+    display: flex;
     flex-direction: column;
-    min-height: 80vh;
+    min-height: 100vh;
     background-image: url('../Immagini/Sfondi/Onorificenze.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover; 
-    overflow-y: none;
     background-position: center center;
+    overflow-y: auto; 
 }
 
 .main-nav-desktop a::after {
@@ -114,56 +113,42 @@ body {
 }
 /* CASA */
 
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    height: clamp(400px, 55vh, 650px); 
+    margin: auto;
+    padding: 40px;
+    box-sizing: border-box;
+}
+
 /* SFONDO MEDAGLIE */
 .theme-light .container {
-    display: flex;
-    align-items: center; 
-    height: 59.7%; 
-    width: 90%; 
-    margin: 50px auto;
-    padding: 30px;
     background-color: rgba(214, 214, 214, 0.7);
-    border-radius: 10px;
-    overflow: auto; 
     transition: all 0.3s;
 }
 
 .theme-dark .container {
-    display: flex;
-    align-items: center; 
-    height: 59.7%; 
-    width: 90%; 
-    margin: 50px auto;
-    padding: 30px;
     background-color: rgba(31, 31, 31, 0.7); 
-    border-radius: 10px;
-    overflow: auto; 
     transition: all 0.3s;
 }
 
 .theme-christmas .container {
-    display: flex;
-    align-items: center; 
-    height: 59.7%; 
-    width: 90%; 
-    margin: 50px auto;
-    padding: 30px;
     background-color: rgba(105, 48, 48, 0.7);
-    border-radius: 10px;
-    overflow: auto; 
     transition: all 0.3s;
 }
 /* SFONDO MEDAGLIE */
 
 .image-gallery-section {
-    flex: 1; 
-    padding-right: 40px;
-    position: relative;
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center; 
-    min-width: 680px; 
+    min-width: 0;
+    padding-right: 30px;
 }
 
 .medal-title-overlay {
@@ -173,8 +158,8 @@ body {
 }
 
 #medal-title-text {
-    font-size: 2.2rem;
-    margin: 0;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    margin-bottom: 2vh;
     transition: color 1s ease-in-out; 
 }
 
@@ -194,8 +179,8 @@ body {
 }
 
 .medal-images-wrapper {
-    width: 250px; 
-    height: 250px;
+    width: clamp(150px, 20vw, 300px); 
+    height: clamp(150px, 20vw, 300px);
     position: relative;
 }
 
@@ -214,35 +199,32 @@ body {
     opacity: 1;
 }
 
+.description-section p {
+    font-size: clamp(1.1rem, 1.4vw, 1.4rem);
+    line-height: 1.4;
+    margin: 0;
+    font-style: italic;
+}
+
 .description-section {
-    flex: 2; 
-    padding-left: 40px;
-    min-height: 100%; 
-    overflow-y: auto;
+    flex: 1.2;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    border-left: 1px solid transparent;
-    align-self: flex-start;
+    padding-left: 40px;
+    border-left: 3px solid;
+    min-height: 250px;
 }
 
 /* COLORE TESTO */
 .theme-light .description-section p {
-    font-size: 1.5rem;
-    line-height: 1.6;
-    margin-top: 20px;
     color: #000;
-    font-style: italic;
     transition: all 0.3s;
 }
 
 .theme-dark .description-section p,
 .theme-christmas .description-section p {
-    font-size: 1.5rem;
-    line-height: 1.6;
-    margin-top: 20px;
     color: #f1f1f1;
-    font-style: italic;
     transition: all 0.3s;
 }
 /* COLORE TESTO */
