@@ -125,6 +125,7 @@ body {
     background-color: rgba(214, 214, 214, 0.7);
     border-radius: 10px;
     overflow: auto; 
+    transition: all 0.3s;
 }
 
 .theme-dark .container {
@@ -137,6 +138,7 @@ body {
     background-color: rgba(31, 31, 31, 0.7); 
     border-radius: 10px;
     overflow: auto; 
+    transition: all 0.3s;
 }
 
 .theme-christmas .container {
@@ -149,6 +151,7 @@ body {
     background-color: rgba(105, 48, 48, 0.7);
     border-radius: 10px;
     overflow: auto; 
+    transition: all 0.3s;
 }
 /* SFONDO MEDAGLIE */
 
@@ -160,7 +163,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center; 
-    min-width: 300px; 
+    min-width: 680px; 
 }
 
 .medal-title-overlay {
@@ -177,14 +180,17 @@ body {
 
 #medal-title-text.gold {
     color: #CDA434;
+    transition: all 0.3s;
 }
 
 #medal-title-text.silver {
     color: #c0c0c0;
+    transition: all 0.3s;
 }
 
 #medal-title-text.bronze {
     color: #cd7f32;
+    transition: all 0.3s;
 }
 
 .medal-images-wrapper {
@@ -227,6 +233,7 @@ body {
     margin-top: 20px;
     color: #000;
     font-style: italic;
+    transition: all 0.3s;
 }
 
 .theme-dark .description-section p,
@@ -236,6 +243,7 @@ body {
     margin-top: 20px;
     color: #f1f1f1;
     font-style: italic;
+    transition: all 0.3s;
 }
 /* COLORE TESTO */
 

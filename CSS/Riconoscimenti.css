@@ -163,6 +163,12 @@ body::-webkit-scrollbar {
     margin: 0 auto;
     filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
     cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.skin-img:hover {
+    transform: scale(1.05);
+    transition: all 0.3s ease;
 }
 
 .skin-card p {
@@ -222,6 +228,13 @@ body::-webkit-scrollbar {
 .medal-item img,
 .medal-item p {
     cursor: pointer;
+    transition: all 0.3s;
+}
+
+.medal-item img:hover,
+.medal-item p:hover {
+    transform: scale(1.1);
+    transition: all 0.3s;
 }
 
 .medal-item img {

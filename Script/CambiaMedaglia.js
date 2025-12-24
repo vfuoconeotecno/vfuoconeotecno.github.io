@@ -23,11 +23,10 @@ document.addEventListener('DOMContentLoaded', () => {
         nextImage.classList.add('active');
 
         const medalColor = nextImage.getAttribute('data-color'); 
+        
         const cssClass = colorClassMap[medalColor];
         const borderClass = `border-${cssClass}`;
 
-        titleElement.textContent = `Medaglia al Merito e al Valore`; 
-        
         titleElement.classList.remove(...colorClasses); 
         if (cssClass) {
             titleElement.classList.add(cssClass); 
@@ -43,8 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
         images[0].classList.add('active');
         const initialColorKey = images[0].getAttribute('data-color');
         const initialClass = colorClassMap[initialColorKey];
-        
-        titleElement.textContent = `Medaglia al Merito e al Valore`;
         
         if (initialClass) {
             titleElement.classList.add(initialClass);
