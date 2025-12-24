@@ -215,7 +215,7 @@ body.page-leaving .theme-switcher button img {
 
 /* FOOTER */
 .theme-light .main-footer {
-    position: sticky; 
+    position: fixed; 
     bottom: 0;
     left: 0;
     width: 100%;
@@ -228,7 +228,7 @@ body.page-leaving .theme-switcher button img {
 }
 
 .theme-dark .main-footer {
-    position: sticky; 
+    position: fixed; 
     bottom: 0;
     left: 0;
     width: 100%;
@@ -241,7 +241,7 @@ body.page-leaving .theme-switcher button img {
 }
 
 .theme-christmas .main-footer {
-    position: sticky; 
+    position: fixed; 
     bottom: 0;
     left: 0;
     width: 100%;
