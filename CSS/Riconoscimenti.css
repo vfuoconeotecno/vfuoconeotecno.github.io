@@ -4,7 +4,7 @@ body {
     margin: 0;
     display: block;
     flex-direction: column;
-    min-height: 310vh;
+    min-height: 400vh;
     background-image: url('../Immagini/Sfondi/Onorificenze.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
