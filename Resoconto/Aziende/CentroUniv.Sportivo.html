@@ -4,17 +4,30 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
         <title>Vigili del Fuoco di Neotecno » Sito Ufficiale</title>
         <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+        <link rel="stylesheet" href="../../CSS/Aziende.css">
         <link rel="stylesheet" href="../../CSS/globale.css"> 
-        <link rel="stylesheet" href="../../CSS/Aziende.css"> 
         <link rel="icon" type="image/png" href="../../Logo/favicon.ico"> 
         <meta property="og:type" content="website">
     </head>
     <style>
-    body {
-        background-image: url('../../Immagini/Sfondi/Abitazioni.png');
-    }
+        #resoconto-abitazioni.theme-light .content,
+        #resoconto-abitazioni.theme-christmas .content {
+        background-image: url('../../Immagini/Sfondi/AbitazioniLight.png');
+        background-position: top center; 
+        background-size: cover; 
+        background-attachment: scroll;
+        background-repeat: no-repeat;
+        }
+
+        #resoconto-abitazioni.theme-dark .content {
+        background-image: url('../../Immagini/Sfondi/AbitazioniDark.png');
+        background-position: top center; 
+        background-size: cover; 
+        background-attachment: scroll;
+        background-repeat: no-repeat;
+        }
     </style>
-        <body>  
+        <body id="resoconto-abitazioni">
             <div id="transition-layer">
                 <div class="loader">
                     <span></span>
@@ -28,7 +41,7 @@
                         <a href="../../index.html"><img src="../../Logo/Logo.png" alt="Logo VdF"></a>
                     </div>
                     <div class="header-title">
-                        Vigili del Fuoco di Neotecno » Resoconto Mensile
+                        Vigili del Fuoco di Neotecno » Onorificenze
                     </div>
                     <div class="header-right-controls">
                         <div class="theme-switcher">
@@ -41,11 +54,11 @@
                 <div class="header-bottom">
                     <nav class="main-nav-desktop">
                         <ul>
-                            <li><a href="../../index.html" class="active"><img src="../../Immagini/Casa.png"></a></li>
+                            <li><a href="../../index.html"><img src="../../Immagini/Casa.png"></a></li>
                             <li><a href="../../Gerarchia/Gerarchia.html">PERSONALE</a></li>
                             <li><a href="../../Regolamento/Regolamento.html">REGOLAMENTO UFFICIALE</a></li>
                             <li><a href="../../Riconoscimenti/Riconoscimenti.html">ONORIFICENZE</a></li>
-                            <li><a href="../../Resoconto/Resoconto.html">RESOCONTO MENSILE</a></li>
+                            <li><a href="../../Resoconto/Resoconto.html" class="active">RESOCONTO MENSILE</a></li>
                             <li><a href="../../Bacheca/Bacheca.html">BACHECA</a></li>
                             <li><a href="../../Guardaci/Guardaci.html">GUARDACI</a></li>
                         </ul>
@@ -54,13 +67,44 @@
             </header>
 
             <div class="content"> 
-                <main class="main-content-wrapper"> 
-                    
-                    <div class="welcome-message">
-                        Coming Soon...
-                    </div>
-                    
-                </main>
+                <div class="header-titoli">
+                    <div class="azienda">Abitazioni</div>
+                    <div class="incendio">Resoconto Annuale</div>
+                </div>
+                <table class="monthly-report-table">
+                    <thead>
+                        <tr>
+                            <th>Gennaio</th>
+                            <th>Febbraio</th>
+                            <th>Marzo</th>
+                            <th>Aprile</th>
+                            <th>Maggio</th>
+                            <th>Giugno</th>
+                            <th>Luglio</th>
+                            <th>Agosto</th>
+                            <th>Settembre</th>
+                            <th>Ottobre</th>
+                            <th>Novembre</th>
+                            <th>Dicembre</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="data-value"></td>
+                            <td class="data-value"></td>
+                            <td class="data-value"></td>
+                            <td class="data-value"></td>
+                            <td class="data-value"></td>
+                            <td class="data-value"></td>
+                            <td class="data-value">19</td>
+                            <td class="data-value">14</td>
+                            <td class="data-value">13</td>
+                            <td class="data-value">11</td>
+                            <td class="data-value">9</td>
+                            <td class="data-value"></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             
             <footer class="main-footer">

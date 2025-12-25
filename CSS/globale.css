@@ -56,21 +56,20 @@ img {
     padding: 5px 20px;
 }
 
-/* TITOLO */
-.theme-light .header-title,
-.theme-dark .header-title {
+.header-title {
     flex-grow: 1; 
     text-align: center; 
     font-size: 1.8rem;
-    font-weight: bold;
+}
+
+/* TITOLO */
+.theme-light .header-title,
+.theme-dark .header-title {
     color: #af3745; 
 }
 
 .theme-christmas .header-title {
-    flex-grow: 1; 
-    text-align: center; 
-    font-size: 1.8rem;
-    font-weight: bold;
+
     color: #f1f1f1; 
 }
 /* TITOLO */
@@ -80,7 +79,6 @@ img {
     align-items: center;
     gap: 8px;
     font-size: 1.8rem;
-    font-weight: bold;
 }
 
 .logo img {
@@ -187,32 +185,117 @@ body.page-leaving .theme-switcher button img {
     margin: 0 10px;
 }
 
-/* MENU */
-.theme-light .main-nav-desktop a {
-    text-decoration: none;
-    color: #131313;
+.main-nav-desktop a
+{
     font-size: 1rem;
+    text-decoration: none;
     padding: 10px 10px;
     display: inline-flex; 
     align-items: center; 
     position: relative;
-    transition: color 0.3s;
     font-weight: bold;
+    transition: color 0.3s;
+}
+
+/* MENU */
+.theme-light .main-nav-desktop a {
+    color: #131313;
+    transition: color 0.3s;
 }
 
 .theme-dark .main-nav-desktop a,
 .theme-christmas .main-nav-desktop a {
-    text-decoration: none;
     color: #f1f1f1;
-    font-size: 1rem;
-    padding: 10px 10px;
-    display: inline-flex; 
-    align-items: center; 
-    position: relative;
     transition: color 0.3s;
-    font-weight: bold;
 }
 /* MENU */
+
+
+.main-nav-desktop a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    transition: width 0.4s ease-out;
+}
+
+.main-nav-desktop a.active::after, 
+.main-nav-desktop a:hover::after, 
+.main-nav-desktop a:focus::after {
+    width: 100%;
+}
+
+/* PASSARCI SOPRA MENU */
+.theme-light .main-nav-desktop a.active, 
+.theme-light .main-nav-desktop a:hover, 
+.theme-light .main-nav-desktop a:focus,
+.theme-dark .main-nav-desktop a.active, 
+.theme-dark .main-nav-desktop a:hover, 
+.theme-dark .main-nav-desktop a:focus {
+    color: #af3745;
+}
+
+.theme-light .main-nav-desktop a.active::after, 
+.theme-light .main-nav-desktop a:hover::after, 
+.theme-light .main-nav-desktop a:focus::after,
+.theme-dark .main-nav-desktop a.active::after, 
+.theme-dark .main-nav-desktop a:hover::after, 
+.theme-dark .main-nav-desktop a:focus::after {
+    background-color: #af3745; 
+}
+
+.theme-christmas .main-nav-desktop a.active, 
+.theme-christmas .main-nav-desktop a:hover, 
+.theme-christmas .main-nav-desktop a:focus {
+    color: #410000;
+}
+
+.theme-christmas .main-nav-desktop a.active::after, 
+.theme-christmas .main-nav-desktop a:hover::after, 
+.theme-christmas .main-nav-desktop a:focus::after {
+    background-color: #410000;
+}
+/* PASSARCI SOPRA MENU */
+
+.main-nav-desktop a img {
+    height: 1.3rem; 
+    width: auto;
+    vertical-align: middle; 
+    margin-right: 5px; 
+    border: none;
+    transition: filter 0.3s;
+}
+
+
+/* CASA */
+.theme-dark .main-nav-desktop a img,
+.theme-christmas .main-nav-desktop a img {
+    filter: invert(100%);
+    transition: filter 0.3s;
+}
+
+
+.theme-light .main-nav-desktop a.active img,
+.theme-light .main-nav-desktop a:hover img,
+.theme-light .main-nav-desktop a:focus img {
+    filter: invert(20%) sepia(80%) saturate(1400%) hue-rotate(330deg) brightness(90%);
+}
+
+.theme-dark .main-nav-desktop a.active img,
+.theme-dark .main-nav-desktop a:hover img,
+.theme-dark .main-nav-desktop a:focus img {
+    filter: invert(20%) sepia(80%) saturate(1400%) hue-rotate(330deg) brightness(90%);
+}
+
+.theme-christmas .main-nav-desktop a.active img,
+.theme-christmas .main-nav-desktop a:hover img,
+.theme-christmas .main-nav-desktop a:focus img 
+{
+    filter: invert(15%) sepia(50%) saturate(1500%) hue-rotate(330deg) brightness(80%);
+}
+/* CASA */
 
 /* FOOTER */
 .theme-light .main-footer {
