@@ -210,6 +210,7 @@ body.page-leaving .theme-switcher button img {
     align-items: center; 
     position: relative;
     transition: color 0.3s;
+    font-weight: bold;
 }
 /* MENU */
 
