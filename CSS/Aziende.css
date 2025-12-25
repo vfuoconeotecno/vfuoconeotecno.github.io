@@ -6,7 +6,6 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-image: url('../Immagini/Sfondi/Gerarchia.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover; 
@@ -21,6 +20,70 @@ body::-webkit-scrollbar {
   height: 0;
 }
 
+
+/* SFONDO */
+.theme-light .content {
+    background-position: top center; 
+    background-size: cover; 
+    background-attachment: scroll;
+    background-repeat: no-repeat;
+    background-color: #1a1a1a; 
+    flex-grow: 1;
+    display: flex;
+}
+
+.theme-dark .content {
+    background-position: top center; 
+    background-size: cover; 
+    background-attachment: scroll;
+    background-repeat: no-repeat;
+    background-color: #1a1a1a; 
+    flex-grow: 1;
+    display: flex;
+}
+
+.theme-christmas .content {
+    background-position: top center; 
+    background-size: cover; 
+    background-attachment: scroll;
+    background-repeat: no-repeat;
+    background-color: #1a1a1a; 
+    flex-grow: 1;
+    display: flex;
+}
+/* SFONDO */
+
+.main-content-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    height: 100%;
+    width: 100%;
+
+}
+
+.welcome-box {
+    background-color: rgb(134, 51, 51, 0.85); 
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+    max-width: 600px;
+    width: 90%;
+        background-color: rgb(134, 51, 51, 0.85); 
+}
+
+.welcome-message {
+    text-align: center;
+    padding: 10px;
+    font-size: 3rem;
+    font-weight: 600;
+    text-shadow: 
+        1px 1px 0 #fff,
+       -1px -1px 0 #fff,
+        1px -1px 0 #fff,
+       -1px 1px 0 #fff;
+    color: rgb(71, 17, 17)
+}
 
 /* HEADER */
 .theme-light .main-header {
@@ -252,25 +315,25 @@ body::-webkit-scrollbar {
 /* PASSARCI SOPRA MENU */
 
 /* PAGINA ATTUALE */
-.theme-light .main-nav-desktop ul li a[href="../Resoconto/Resoconto.html"],
-.theme-dark .main-nav-desktop ul li a[href="../Resoconto/Resoconto.html"] {
+.theme-light .main-nav-desktop ul li a[href="../../Resoconto/Resoconto.html"],
+.theme-dark .main-nav-desktop ul li a[href="../../Resoconto/Resoconto.html"] {
     color: #af3745;
     font-weight: bold;
 }
 
-.theme-christmas .main-nav-desktop ul li a[href="../Resoconto/Resoconto.html"] {
+.theme-christmas .main-nav-desktop ul li a[href="../../Resoconto/Resoconto.html"] {
     color: #410000;
     font-weight: bold;
 }
 
-.theme-light .main-nav-desktop ul li a[href="../Resoconto/Resoconto.html"]::after, 
-.theme-dark .main-nav-desktop ul li a[href="../Resoconto/Resoconto.html"]::after {
+.theme-light .main-nav-desktop ul li a[href="../../Resoconto/Resoconto.html"]::after, 
+.theme-dark .main-nav-desktop ul li a[href="../../Resoconto/Resoconto.html"]::after {
     width: 100%;
     background-color: #af3745;
     font-weight: bold;
 }
 
-.theme-christmas .main-nav-desktop ul li a[href="../Resoconto/Resoconto.html"]::after {
+.theme-christmas .main-nav-desktop ul li a[href="../../Resoconto/Resoconto.html"]::after {
     width: 100%;
     background-color: #410000;
 }
@@ -420,149 +483,4 @@ body.theme-christmas .snowflake {
     100% {
         transform: translateY(100vh);
     }
-}
-
-.main-container {
-    width: 95%;
-    max-width: 1400px;
-    margin: 0 auto;
-
-}
-
-.stats-header {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 80px;
-    text-align: center;
-}
-
-.stat-box span { 
-    display: block; 
-    font-family: 'Montserrat', sans-serif;
-    letter-spacing: 3px; 
-    font-weight: 700;
-    color: #fff; 
-    font-size: 2.2rem;
-    text-transform: uppercase; 
-}
-
-.stat-box strong { 
-    font-family: 'Orbitron', sans-serif;
-    font-size: 2rem;
-    display: block; 
-    color: #ac2727;
-    font-weight: 900;
-    text-shadow: 0 0 15px rgba(172, 39, 39, 0.4);
-    margin-top: 5px;
-    line-height: 1;
-}
-
-.chart-scroll-wrapper {
-    width: 100%;
-    padding-bottom: 180px; 
-}
-
-.chart-container {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    height: 400px;
-    width: 100%;
-    padding: 0;
-    position: relative;
-}
-
-.bar-column {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    height: 100%;
-    justify-content: flex-end;
-    text-decoration: none;
-    align-items: center;
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    z-index: 1;
-}
-
-.bar-column:hover {
-    z-index: 10;
-}
-
-.bar-fill {
-    width: 90%;
-    position: relative;
-    border-radius: 2px 2px 0 0;
-    transition: filter 0.3s;
-}
-
-.bar-column:hover .bar-fill,
-.bar-column:hover .bar-name {
-    filter: brightness(1.4);
-    transition: filter 0.3s ease;
-}
-
-.bar-column:hover .bar-name {
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
-    transform: rotate(-45deg) scale(1.05); 
-}
-
-.bar-num {
-    position: absolute;
-    top: -30px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-weight: bold;
-    font-size: 0.9vw; 
-    min-width: 15px;
-    text-align: center;
-    transition: all 0.3s;
-}
-
-.bar-column:hover .bar-num {
-    font-size: 1.1vw;
-    text-shadow: 0 0 10px rgba(255,255,255,0.5);
-}
-
-.bar-name {
-    position: absolute;
-    top: 400px; 
-    left: 50%; 
-    width: 250px; 
-    margin-left: -250px; 
-    transform: rotate(-45deg);
-    transform-origin: right center;
-    text-align: right;
-    white-space: nowrap;
-    font-weight: bold;
-    font-size: 0.8vw;
-    pointer-events: none;
-    padding-right: 5px;
-}
-
-.month {
-    text-align: center;
-    font-size: 2.2rem;
-    font-weight: 800;
-    letter-spacing: 8px;
-    color: #ffffff;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    position: relative;
-    display: block;
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.4), 
-    2px 2px 4px rgba(0, 0, 0, 0.8);
-    font-family: 'Segoe UI', sans-serif;
-}
-
-.month::after {
-    content: "";
-    display: block;
-    width: 60px;
-    height: 3px;
-    background: #fff;
-    margin: 10px auto 0;
-    border-radius: 2px;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }

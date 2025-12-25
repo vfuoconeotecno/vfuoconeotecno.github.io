@@ -11,11 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const s = path.split('/').filter(Boolean);
         console.log("Analisi percorso attuale:", path);
 
-        if (path.includes('/Personale/') && s.length >= 4) return '../../../Audio/Natale.mp3';
-        if (path.includes('/Medaglie/') || path.includes('/Personale/')) return '../../Audio/Natale.mp3';
-        if (s.length >= 1 && !path.endsWith('index.html') && path.includes('/')) return '../Audio/Natale.mp3';
-        return './Audio/Natale.mp3';
-    };
+    if (path.includes('/Aziende/')) return '../../Audio/Natale.mp3';
+    if (path.includes('/Personale/') && s.length >= 4) return '../../../Audio/Natale.mp3';
+    if (path.includes('/Medaglie/') || path.includes('/Personale/')) return '../../Audio/Natale.mp3';
+    if (s.length >= 1 && !path.endsWith('index.html') && path.includes('/')) return '../Audio/Natale.mp3';
+    return './Audio/Natale.mp3';
+};
 
     const audioPath = getAudioPath();
     console.log("Percorso audio scelto:", audioPath);
