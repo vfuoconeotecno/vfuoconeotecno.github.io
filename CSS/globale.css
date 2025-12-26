@@ -20,31 +20,28 @@ img {
     -webkit-user-select: none;
 }
 
-/* HEADER */
-.theme-light .main-header {
-    background-color: rgba(231, 231, 231);
+.main-header {
     position: sticky; 
     top: 0;
     z-index: 50; 
     padding: 5px 0; 
+    transition: background-color 0.4s ease-out;
+    font-weight: 900;
+}
+
+/* HEADER */
+.theme-light .main-header {
+    background-color: rgba(231, 231, 231);
     transition: background-color 0.4s ease-out;
 }
 
 .theme-dark .main-header {
     background-color: rgba(10, 10, 10);
-    position: sticky; 
-    top: 0;
-    z-index: 50; 
-    padding: 5px 0; 
     transition: background-color 0.4s ease-out;
 }
 
 .theme-christmas .main-header {
     background-color: rgba(150, 62, 73);
-    position: sticky; 
-    top: 0;
-    z-index: 50; 
-    padding: 5px 0; 
     transition: background-color 0.4s ease-out;
 }
 /* HEADER */
