@@ -93,6 +93,36 @@ img {
     gap: 10px;
 }
 
+/* =========================================================================
+ * MENU HAMBURGER (PER JS)
+ * ========================================================================= */
+
+.menu {
+    display: none; /* Nascosto di default sul desktop */
+    position: fixed; 
+    top: 20px; 
+    right: 20px;
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+    z-index: 1000; 
+    padding: 5px 10px;
+    transition: color 0.3s;
+}
+
+/* Colori del menu hamburger */
+.theme-light .menu {
+    color: #131313;
+}
+.theme-dark .menu,
+.theme-christmas .menu {
+    color: #f1f1f1;
+}
+
+/* =========================================================================
+ * FINE MENU HAMBURGER
+ * ========================================================================= */
+
 .theme-switcher {
     display: flex;
     gap: 40px;
@@ -503,7 +533,7 @@ body.theme-christmas .snowflake {
     }
 
     .header-title {
-        font-size: 1.5rem;
+        font-size: 0.8rem;
         order: 2;
     }
 
@@ -513,25 +543,85 @@ body.theme-christmas .snowflake {
 
     .logo img {
         height: 5rem;
+        width: 5rem;
     }
 
     .header-right-controls {
         order: 3;
         gap: 5px;
     }
-
+    
+    /* MOSTRA L'HAMBURGER */
+    .menu {
+        display: block; 
+        top: 100px; /* Abbassato come richiesto precedentemente */
+        right: 0px;
+    }
+    
     .theme-switcher {
         gap: 15px;
     }
 
     .theme-switcher button {
-        width: 35px;
-        height: 35px;
+        width: 30px;
+        height: 30px;
+    }
+    
+    /* NASCONDI IL MENU DI DEFAULT SU MOBILE */
+    .header-bottom {
+        display: block; 
+        padding-top: 0;
+        
+        position: absolute;
+        width: 100%;
+        top: 100px; 
+        left: 0;
+        z-index: 40; 
+        
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        background-color: inherit; 
     }
 
-    .header-bottom,
+    /* =========================================================================
+     * ATTIVAZIONE MENU TRAMITE JAVASCRIPT
+     * Quando il JS aggiunge la classe .menu-open al body, il menu appare.
+     * ========================================================================= */
+    
+    body.menu-open .header-bottom {
+        visibility: visible;
+        opacity: 1;
+    }
+    
     .main-nav-desktop {
-        display: none;
+        display: block; 
+    }
+    
+    .main-nav-desktop ul {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 10px 0;
+    }
+    
+    .main-nav-desktop li {
+        margin: 0;
+        border-bottom: 1px solid rgba(190, 190, 190, 0.2); 
+    }
+    
+    .main-nav-desktop li:last-child {
+        border-bottom: none;
+    }
+    
+    .main-nav-desktop a {
+        padding: 15px;
+        justify-content: center; 
+        width: 100%;
+        display: flex; 
+    }
+    
+    .main-nav-desktop a::after {
+        content: none; 
     }
 
     /* FOOTER MOBILE */

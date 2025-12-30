@@ -220,9 +220,6 @@ img[src*="Niente.png"] {
     cursor: default;
 }
 
-/* =========================================================================
- * MEDIA QUERIES Aggiuntive per Testo (per ridurre il font su schermi piccoli)
- * ========================================================================= */
 
 @media (max-width: 600px) {
     /* Riduci la dimensione del testo per evitare collisioni sui telefoni */
