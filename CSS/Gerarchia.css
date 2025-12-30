@@ -1,23 +1,39 @@
+/* =========================================================================
+ * STILI BODY E SCROLLBAR
+ * ========================================================================= */
+
 body { 
     font-family: 'Montserrat', sans-serif; 
     font-size: 22px; 
     margin: 0;
-    display: block;
-    flex-direction: column;
     min-height: 100vh;
+    /* Immagine di sfondo sul body - come nella tua implementazione */
     background-image: url('../Immagini/Sfondi/Gerarchia.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover; 
     overflow-y: scroll;
     background-position: center center;
+    color: #000;
+    
+    /* ABILITA LIBERO MOVIMENTO TOUCH (Scorrimento in X e Y) */
+    touch-action: pan-x pan-y;
 }
 
+/* Nascondi scrollbar */
 body::-webkit-scrollbar {
-  display: none;
-  width: 0;
-  height: 0;
+    display: none;
+    width: 0;
+    height: 0;
 }
+body {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+/* =========================================================================
+ * ORGANIGRAMMA BASE (RIPRISTINO DELLA TUA STRUTTURA ORIGINALE)
+ * ========================================================================= */
 
 .Organigramma {
     margin: 20px auto; 
@@ -27,15 +43,23 @@ body::-webkit-scrollbar {
     height: auto; 
     padding-bottom: 0; 
     overflow: visible; 
+    
+    /* ABILITA LIBERO MOVIMENTO TOUCH (Scorrimento in X e Y) ANCHE SUL CONTENITORE PRINCIPALE */
+    touch-action: pan-x pan-y;
 }
 
+/* Elemento .organigramma-sfondo ripristinato (usato solo se è un div o img di placeholder) */
 .organigramma-sfondo {
-    position: static;   
+    position: static; 
     top: auto;
     left: auto;
     width: 100%; 
     height: auto;
 }
+
+/* =========================================================================
+ * STILI COMUNI PER DISTINTIVI E TESTI
+ * ========================================================================= */
 
 .distintivo {
     position: absolute; 
@@ -49,151 +73,16 @@ body::-webkit-scrollbar {
     transition: transform 0.3s ease;
 }
 
-.DirigenteGenerale {
-    left: 43%;
-    top: 1%;
-}
-
-.DirigenteSuperiore {
-    left: -24%; 
-    top: 2%;
-}
-
-.PrimoDirigente {
-    left: 107%;
-    top: 2%;
-}
-
-.ViceDirigente {
-    left: -21%; 
-    top: 6%;
-}
-
-.ViceDirigenteAggiunto {
-    left: 113%;
-    top: 6%;
-}
-
-.IspettoreCoordinatore {
-    left: 110%;
-    top: 10%;
-}
-
-.IspettoreEsperto1 {
-    left: 109%;
-    top: 14.2%;
-}
-
-.IspettoreEsperto2 {
-    left: -22%;
-    top: 11.1%;
-}
-
-.Ispettore {
-    left: -16%;
-    top: 15.4%;
-}
-
-.CapoRepartoEsperto {
-    left: -27%;
-    top: 18.8%;
-}
-
-.CapoReparto {
-    left: 106%;
-    top: 18.8%;
-}
-
-.CapoSquadraEsperto1 {
-    left: 72%;
-    top: 32.8%;
-}
-
-.CapoSquadraEsperto2 {
-    left: 15%;
-    top: 32.8%;
-}
-
-.CapoSquadra1 {
-    left: 72%;
-    top: 41.7%;   
-}
-
-.CapoSquadra2 {
-    left: 15%;
-    top: 41.7%;  
-}
-
-.Coordinatore {
-    left: 15%;
-    top: 50.6%; 
-}
-
-.Esperto1 {
-    left: 72%;
-    top: 50.6%; 
-}
-
-.Esperto2 {
-    left: 72%;
-    top: 59.5%;   
-}
-
-.Esperto3 {
-    left: 15%;
-    top: 59.5%;   
-}
-
-.Esperto4 {
-    left: 15%;
-    top: 68.4%; 
-}
-
-.Esperto5 {
-    left: 72%;
-    top: 68.4%; 
-}
-
-.Esperto6 {
-    left: 15%;
-    top: 77.3%; 
-}
-
-.Vigile1 {
-    left: 72%;
-    top: 77.3%; 
-}
-
-.Vigile2 {
-    left: 15%;
-    top: 86.2%;
-}
-
-.Vigile3 {
-    left: 72%;
-    top: 86.2%;
-}
-
-.Vigile4 {
-    left: 15%;
-    top: 95.2%;
-}
-
-.Vigile5 {
-    left: 72%;
-    top: 95.2%;
-}
-
-
 .posizione-assoluta {
     position: absolute;
     z-index: 10;
     text-align: center;
     user-select: none;
+    white-space: nowrap; 
 }
 
 .Gerarchie {
-    font-size: 2.5em;
+    font-size: 2.5em; 
     font-weight: bold;
     color: #af3745; 
     text-align: center;
@@ -205,45 +94,59 @@ body::-webkit-scrollbar {
     font-style: italic;
 }
 
-.gerarchia-dirigenza {
+/* =========================================================================
+ * POSIZIONAMENTO DEI DISTINTIVI (percentuali mantenute)
+ * ========================================================================= */
+
+.DirigenteGenerale { left: 43%; top: 1%; }
+.DirigenteSuperiore { left: -24%; top: 2%; }
+.PrimoDirigente { left: 107%; top: 2%; }
+.ViceDirigente { left: -21%; top: 6%; }
+.ViceDirigenteAggiunto { left: 113%; top: 6%; }
+.IspettoreCoordinatore { left: 110%; top: 10%; }
+.IspettoreEsperto1 { left: 109%; top: 14.2%; }
+.IspettoreEsperto2 { left: -22%; top: 11.1%; }
+.Ispettore { left: -16%; top: 15.4%; }
+.CapoRepartoEsperto { left: -27%; top: 18.8%; }
+.CapoReparto { left: 106%; top: 18.8%; }
+.CapoSquadraEsperto1 { left: 72%; top: 32.8%; }
+.CapoSquadraEsperto2 { left: 15%; top: 32.8%; }
+.CapoSquadra1 { left: 72%; top: 41.7%; }
+.CapoSquadra2 { left: 15%; top: 41.7%; }
+.Coordinatore { left: 15%; top: 50.6%; }
+.Esperto1 { left: 72%; top: 50.6%; }
+.Esperto2 { left: 72%; top: 59.5%; }
+.Esperto3 { left: 15%; top: 59.5%; }
+.Esperto4 { left: 15%; top: 68.4%; }
+.Esperto5 { left: 72%; top: 68.4%; }
+.Esperto6 { left: 15%; top: 77.3%; }
+.Vigile1 { left: 72%; top: 77.3%; }
+.Vigile2 { left: 15%; top: 86.2%; }
+.Vigile3 { left: 72%; top: 86.2%; }
+.Vigile4 { left: 15%; top: 95.2%; }
+.Vigile5 { left: 72%; top: 95.2%; }
+
+/* =========================================================================
+ * POSIZIONAMENTO DEI TESTI RUOLO (Responsività Migliorata con VH)
+ * ========================================================================= */
+
+.gerarchia-dirigenza, .gerarchia-ispettorato, 
+.gerarchia-capi-reparto, .gerarchia-operatori {
     width: 100%;
     left: 50%;
     transform: translateX(-50%);
-    top: 10px;
 }
 
-.gerarchia-ispettorato {
-    width: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 990px;
-}  
+/* Uso di VH (Viewport Height) per i titoli di sezione per scalare in base all'altezza dello schermo */
+.gerarchia-dirigenza { top: 1vh; } 
+.gerarchia-ispettorato { top: 100vh; } 
+.gerarchia-capi-reparto { top: 150vh; } 
+.gerarchia-operatori { top: 220vh; } 
 
-.gerarchia-capi-reparto {
-    width: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 1560px;
-}   
-
-.gerarchia-operatori {
-    width: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 2150px;
-}  
-
-.ruolo-dirigente-generale {
-    top: 3.6%; 
-    left: 34%; 
-}
-
-.ruolo-dirigente-superiore {
-    top: 4.6%; 
-    left: -34%;
-}
-
-.ruolo-primo-dirigente {
+/* Ruoli singoli: I top e left sono in percentuale e si adatteranno al contenitore */
+.ruolo-dirigente-generale { top: 3.6%; left: 34%; }
+.ruolo-dirigente-superiore { top: 4.6%; left: -34%; }
+.ruolo-primo-dirigente { 
     top: 4.6%; 
     width: auto; 
     white-space: nowrap; 
@@ -251,12 +154,8 @@ body::-webkit-scrollbar {
     transform: translateX(-100%); 
 }
 
-.ruolo-vice-dirigente {
-    top: 5.72%; 
-    left: -25%;
-}
-
-.ruolo-vice-dirigente-aggiunto {
+.ruolo-vice-dirigente { top: 5.72%; left: -25%; }
+.ruolo-vice-dirigente-aggiunto { 
     top: 5.72%; 
     width: auto; 
     white-space: nowrap; 
@@ -264,7 +163,7 @@ body::-webkit-scrollbar {
     transform: translateX(-100%); 
 }
 
-.ruolo-ispettore-coordinatore {
+.ruolo-ispettore-coordinatore { 
     top: 12.62%; 
     width: auto; 
     white-space: nowrap; 
@@ -272,30 +171,18 @@ body::-webkit-scrollbar {
     transform: translateX(-100%); 
 }
 
-.ruolo-ispettore-esperto1 {
+.ruolo-ispettore-esperto1 { 
     top: 13.8%; 
     width: auto; 
     white-space: nowrap; 
     left: 130%; 
     transform: translateX(-100%); 
 }
+.ruolo-ispettore-esperto2 { top: 13.8%; left: -30%; }
+.ruolo-ispettore { top: 14.92%; left: -17%; }
 
-.ruolo-ispettore-esperto2 {
-    top: 13.8%; 
-    left: -30%;
-}
-
-.ruolo-ispettore {
-    top: 14.92%; 
-    left: -17%;
-}
-
-.ruolo-capo-reparto-esperto {
-    top: 21.42%;    
-    left: -38%;
-}
-
-.ruolo-capo-reparto {
+.ruolo-capo-reparto-esperto { top: 21.42%; left: -38%; }
+.ruolo-capo-reparto { 
     top: 21.42%; 
     width: auto; 
     white-space: nowrap; 
@@ -303,87 +190,56 @@ body::-webkit-scrollbar {
     transform: translateX(-100%); 
 }
 
-.ruolo-capo-squadra-esperto1 {
-    top: 32.42%;    
-    left: 3%;
-}
+.ruolo-capo-squadra-esperto1 { top: 32.42%; left: 3%; }
+.ruolo-capo-squadra-esperto2 { top: 32.42%; left: 60%; }
 
-.ruolo-capo-squadra-esperto2 {
-    top: 32.42%;     
-    left: 60%;
-}
+.ruolo-capo-squadra1 { top: 41.3%; left: 9%; }
+.ruolo-capo-squadra2 { top: 41.3%; left: 66%; }
 
-.ruolo-capo-squadra1 {
-    top: 41.3%;    
-    left: 9%;
-}
+.ruolo-coordinatore { top: 50.2%; left: -2%; }
+.ruolo-esperto1 { top: 50.2%; left: 59%; }
 
-.ruolo-capo-squadra2 {
-    top: 41.3%;     
-    left: 66%;
-}
+.ruolo-esperto2 { top: 59.1%; left: 2%; }
+.ruolo-esperto3 { top: 59.1%; left: 59%; }
 
-.ruolo-coordinatore {
-    top: 50.2%;    
-    left: -2%;
-}
+.ruolo-esperto4 { top: 68%; left: 2%; }
+.ruolo-esperto5 { top: 68%; left: 59%; }
 
-.ruolo-esperto1 {
-    top: 50.2%;  
-    left: 59%;
-}
+.ruolo-esperto6 { top: 76.9%; left: 2%; }
+.ruolo-vigile1 { top: 76.9%; left: 65%; }
 
-.ruolo-esperto2 {
-    top: 59.1%;    
-    left: 2%;
-}
+.ruolo-vigile2 { top: 85.8%; left: 8%; }
+.ruolo-vigile3 { top: 85.8%; left: 65%; }
 
-.ruolo-esperto3 {
-    top: 59.1%;   
-    left: 59%;
-}
+.ruolo-vigile4 { top: 94.8%; left: 8%; }
+.ruolo-vigile5 { top: 94.8%; left: 65%; }
 
-.ruolo-esperto4 {
-    top: 68%;    
-    left: 2%;
-}
-
-.ruolo-esperto5 {
-    top: 68%;    
-    left: 59%;
-}
-
-.ruolo-esperto6 {
-    top: 76.9%;        
-    left: 2%;
-}
-
-.ruolo-vigile1 {
-    top: 76.9%;  
-    left: 65%;
-}
-
-.ruolo-vigile2 {
-    top: 85.8%;  
-    left: 8%;
-}
-
-.ruolo-vigile3 {
-    top: 85.8%;   
-    left: 65%;
-}
-
-.ruolo-vigile4 {
-    top: 94.8%;    
-    left: 8%;
-}
-
-.ruolo-vigile5 {
-    top: 94.8%;   
-    left: 65%;
-}
-
+/* Disabilita interazioni per le immagini "vuote" */
 img[src*="Niente.png"] {
     pointer-events: none;
     cursor: default;
+}
+
+/* =========================================================================
+ * MEDIA QUERIES Aggiuntive per Testo (per ridurre il font su schermi piccoli)
+ * ========================================================================= */
+
+@media (max-width: 600px) {
+    /* Riduci la dimensione del testo per evitare collisioni sui telefoni */
+    .Gerarchie {
+        font-size: 1.8em;
+    }
+    .Ruolo {
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 400px) {
+    /* Ulteriore riduzione per schermi molto piccoli */
+    .Gerarchie {
+        font-size: 1.3em;
+    }
+    .Ruolo {
+        font-size: 0.7em;
+    }
 }
