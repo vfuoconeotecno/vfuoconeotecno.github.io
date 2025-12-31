@@ -1,7 +1,3 @@
-/* =========================================================================
- * STILI GENERALI DEL BODY
- * ========================================================================= */
-
 body { 
     font-family: 'Montserrat', sans-serif; 
     font-size: 22px; 
@@ -10,25 +6,16 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    /* Rimuovi overflow-x: hidden dal body qui se non lo è già nel CSS globale, 
-       per evitare barre di scorrimento orizzontali non necessarie. 
-       Se è nel CSS globale, va bene, ma assicurati che sia gestito */
 }
 
-/* =========================================================================
- * STILI DEL CONTENUTO (SFONDO FISSO E FLEX LAYOUT)
- * ========================================================================= */
-
 .content {
-    background-position: center center; /* Ottimizzato per tutti gli schermi */
+    background-position: center center;
     background-size: cover; 
-    background-attachment: fixed; /* <-- MODIFICA EFFETTUATA QUI: rende lo sfondo fisso */
+    background-attachment: fixed;
     background-repeat: no-repeat;
     background-color: #1a1a1a; 
     flex-grow: 1;
     display: flex;
-    /* padding-bottom per compensare il footer fisso, se necessario, 
-       ma lo gestiamo con min-height e footer fisso sul body */
 }
 
 /* SFONDO */
@@ -52,33 +39,24 @@ body {
     align-items: center; 
     height: 100%;
     width: 100%;
-    /* Aggiungiamo un padding orizzontale per schermi molto stretti, 
-       in modo che il welcome-box non tocchi i bordi */
     padding: 0 10px; 
     box-sizing: border-box;
 }
 
-/* =========================================================================
- * WELCOME BOX
- * ========================================================================= */
-
 .welcome-box {
-    /* Unisce le due dichiarazioni di background-color ripetute */
     background-color: rgba(134, 51, 51, 0.85); 
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
-    max-width: 600px; /* Limite massimo per schermi grandi */
-    width: 90%; /* Occupa il 90% della larghezza disponibile */
-    
-    /* Garantisce che il padding interno sia incluso nella larghezza */
+    max-width: 600px;
+    width: 90%;
     box-sizing: border-box;
 }
 
 .welcome-message {
     text-align: center;
     padding: 10px;
-    font-size: 3rem; /* Ottimo per desktop */
+    font-size: 3rem;
     font-weight: 600;
     text-shadow: 
         1px 1px 0 #fff,
@@ -88,79 +66,53 @@ body {
     color: rgb(71, 17, 17)
 }
 
-/* =========================================================================
- * MEDIA QUERIES PER RESPONSIVE DESIGN (TUTTI GLI SCHERMI)
- * ========================================================================= */
 
-/* Tablet e dispositivi intermedi (768px a 1024px) */
 @media (max-width: 1024px) {
-    /* Ridimensiona il testo del body */
     body {
         font-size: 20px;
     }
     
-    /* Leggera riduzione del box di benvenuto */
     .welcome-box {
         max-width: 500px;
         padding: 15px;
     }
 
-    /* Riduzione della dimensione del messaggio di benvenuto */
     .welcome-message {
         font-size: 2.5rem;
     }
 }
 
-/* Smartphone (fino a 768px) */
 @media (max-width: 768px) {
-    /* Il media query del CSS globale gestirà già molte cose, 
-       ma riadattiamo specificamente questo blocco */
-    
-    /* Ridimensiona il testo del body */
     body {
         font-size: 18px;
     }
     
     .content {
-        /* Assicuriamo che lo sfondo si concentri sulle aree principali */
         background-position: center center;
     }
 
     .main-content-wrapper {
-        /* Aumentiamo il padding per evitare che l'hamburger fisso (se lo hai abbassato)
-           possa interferire con il contenuto in alto */
         padding: 50px 10px; 
     }
 
     .welcome-box {
-        /* Rendi il box ancora più stretto per schermi piccoli (95% della viewport) */
         width: 95%; 
         padding: 15px 10px;
     }
 
-    /* Riduzione aggressiva della dimensione del messaggio di benvenuto */
     .welcome-message {
-        /* Usa unità di misura relative (vw) per il testo molto grande 
-           per farlo scalare con la larghezza della viewport */
         font-size: 6vw; 
-        /* Limita comunque la dimensione minima per la leggibilità */
-        /* Nota: min-font-size non è standard, ma è un commento per il design */
-        /* min-font-size: 1.5rem; */ 
         padding: 5px;
         line-height: 1.2;
     }
 }
 
-/* Schermi molto piccoli (es. telefoni stretti in verticale) */
 @media (max-width: 480px) {
     .welcome-message {
-        /* Assicurati che non sia troppo piccolo */
         font-size: 7vw;
     }
     
     .welcome-box {
-        /* Aumenta la trasparenza dello sfondo per migliorare la leggibilità 
-           su sfondi molto dettagliati, se necessario */
         background-color: rgba(134, 51, 51, 0.9);
         padding: 10px;
     }
