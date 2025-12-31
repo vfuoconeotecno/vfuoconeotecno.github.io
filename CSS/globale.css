@@ -78,6 +78,12 @@ img {
     align-items: center;
     gap: 8px;
     font-size: 1.8rem;
+    
+    /* MODIFICA: Bilanciamento Flexbox. 
+       Diamo al logo una larghezza di base fissa (es. 250px)
+       in modo che lo spazio per il titolo sia simmetrico. */
+    flex-basis: 250px; 
+    flex-shrink: 0;
 }
 
 .logo img {
@@ -91,6 +97,11 @@ img {
     justify-content: flex-end;
     align-items: center;
     gap: 10px;
+    
+    /* MODIFICA: Bilanciamento Flexbox. 
+       Diamo ai controlli la stessa larghezza di base del logo. */
+    flex-basis: 250px; 
+    flex-shrink: 0;
 }
 
 /* =========================================================================
@@ -98,6 +109,7 @@ img {
  * ========================================================================= */
 
 .menu {
+    /* Manteniamo display: none; qui solo se l'hamburger deve apparire SOLO in mobile */
     display: none; /* Nascosto di default sul desktop */
     font-size: 2rem;
     cursor: pointer;
@@ -529,6 +541,8 @@ body.theme-christmas .snowflake {
     .header-title {
         font-size: 0.8rem;
         order: 2;
+        /* Rimuoviamo il display: none; che avevi in fondo alla media query,
+           ora usiamo order: 2; come avevi impostato */
     }
 
     .logo {
@@ -545,13 +559,16 @@ body.theme-christmas .snowflake {
         gap: 5px;
     }
     
-.menu {
-    display: block; 
-    position: fixed; 
-    top: 12vh;
-    right: 3vw;
-    z-index: 1000;
-}
+    .menu {
+        display: block; 
+        position: fixed; 
+        top: 12vh;
+        
+        /* MODIFICA: Avviciniamo il menu al bordo per evitare lo scroll orizzontale */
+        right: 10px; 
+        
+        z-index: 1000;
+    }
     
     .theme-switcher {
         gap: 15px;
@@ -636,4 +653,8 @@ body.theme-christmas .snowflake {
         width: 10px;
         height: 10px;
     }
+    
+     .header-title {
+        display: none; 
+    } 
 }
