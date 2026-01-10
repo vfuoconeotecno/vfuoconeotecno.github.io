@@ -12,6 +12,11 @@ body:not(.page-loaded) .site-wrapper {
     pointer-events: none;
 }
 
+body.menu-open .menu {
+    display: none;
+    pointer-events: none;
+}
+
 img {
     -webkit-user-drag: none;
     -khtml-user-drag: none;
@@ -98,14 +103,12 @@ img {
 }
 
 .menu {
-    /* Manteniamo display: none; qui solo se l'hamburger deve apparire SOLO in mobile */
-    display: none; /* Nascosto di default sul desktop */
+    display: none;
     font-size: 2rem;
     cursor: pointer;
     transition: color 0.3s;
 }
 
-/* Colori del menu hamburger */
 .theme-light .menu {
     color: #131313;
 }
@@ -114,9 +117,6 @@ img {
     color: #f1f1f1;
 }
 
-/* =========================================================================
- * FINE MENU HAMBURGER
- * ========================================================================= */
 
 .theme-switcher {
     display: flex;
@@ -198,28 +198,29 @@ body.page-leaving .theme-switcher button img {
 }
 
 .main-nav-desktop ul {
-    list-style: none;
+    padding-left: 0; 
     margin: 0;
-    padding: 0;
     display: flex;
     justify-content: center;
-    align-items: center;
+    list-style: none;
 }
 
 .main-nav-desktop li {
-    margin: 0 10px;
+    margin: 0 5px;
+    display: flex;
 }
 
-.main-nav-desktop a
-{
+.main-nav-desktop a {
     font-size: 1rem;
     font-weight: 1000;
-    padding: 15px 20px;
     text-decoration: none;
     display: inline-flex;
+    justify-content: center;
     align-items: center;
     position: relative;
     transition: color 0.3s;
+    padding: 10px 15px; 
+    text-align: center; 
 }
 
 /* MENU */
@@ -546,13 +547,14 @@ body.theme-christmas .snowflake {
         gap: 5px;
     }
     
-    .menu {
-        display: block; 
-        position: fixed; 
-        top: 12vh;
-        right: 10px; 
-        z-index: 1000;
-    }
+.menu {
+    display: block; 
+    position: fixed; 
+    top: 12vh;
+    z-index: 1000;
+    left: 50%; 
+    transform: translateX(-50%);
+}
     
     .theme-switcher {
         gap: 15px;

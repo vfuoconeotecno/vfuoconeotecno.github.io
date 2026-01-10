@@ -33,11 +33,13 @@ document.addEventListener('dragstart', (e) => {
 
 document.addEventListener('DOMContentLoaded', () => {
     const menuIcon = document.querySelector('.menu');
-    
+    const navContainer = document.querySelector('.main-nav-desktop'); 
     const body = document.body;
     
     if (menuIcon) {
-        menuIcon.addEventListener('click', () => {
+        menuIcon.addEventListener('click', (event) => {
+            event.stopPropagation();
+            
             body.classList.toggle('menu-open');
             
             if (body.classList.contains('menu-open')) {
@@ -47,6 +49,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+    
+    document.addEventListener('click', (event) => {
+        if (body.classList.contains('menu-open')) {
+            
+            if (navContainer && !navContainer.contains(event.target)) {
+                
+                body.classList.remove('menu-open');
+                body.style.overflowY = 'scroll';
+            }
+        }
+    });
     
     const navLinks = document.querySelectorAll('.main-nav-desktop a');
     navLinks.forEach(link => {
