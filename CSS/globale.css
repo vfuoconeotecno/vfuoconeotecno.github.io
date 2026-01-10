@@ -525,6 +525,8 @@ body.theme-christmas .snowflake {
 
 @media (max-width: 768px) {
 
+    .main-header { padding: 10px 0; width: 100%; box-sizing: border-box;}
+
     .main-nav-desktop a, 
     .main-nav-desktop li,
     .header-bottom,
