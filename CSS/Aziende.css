@@ -231,11 +231,10 @@ body {
         padding: 0;
     }
 
-    /* * Modifica per Centrare il Blocco Tabella e ridurne la larghezza */
     .monthly-report-table {
         margin-left: auto;
         margin-right: auto;
-        max-width: 350px; /* Larghezza controllata per il centramento */
+        max-width: 350px; 
         width: 100%;
     }
 

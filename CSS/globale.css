@@ -524,6 +524,14 @@ body.theme-christmas .snowflake {
 }
 
 @media (max-width: 768px) {
+
+    .main-nav-desktop a, 
+    .main-nav-desktop li,
+    .header-bottom,
+    .menu {
+        box-sizing: border-box !important;
+    }
+    
     body.menu-open .header-bottom {
         visibility: visible;
         opacity: 1;
@@ -531,6 +539,7 @@ body.theme-christmas .snowflake {
 
     .header-top {
         padding: 5px 10px; 
+        position: relative;
     }
 
     .header-title { display: none; } 
@@ -539,8 +548,6 @@ body.theme-christmas .snowflake {
     .logo {
         order: 1;
     }
-
-
 
     .header-right-controls {
         order: 3;
@@ -575,6 +582,7 @@ body.theme-christmas .snowflake {
         visibility: hidden;
         opacity: 0;
         transition: opacity 0.3s, visibility 0.3s;
+        box-shadow: 0 10px 10px rgba(0,0,0,0.1);
     }
     
     body.menu-open .header-bottom {
@@ -582,11 +590,10 @@ body.theme-christmas .snowflake {
         opacity: 1;
     }
     
-    .main-nav-desktop {
-        display: block; 
-    }
+    .main-nav-desktop { display: block; width: 100%; }
     
-.main-nav-desktop ul {
+    .main-nav-desktop ul {
+        display: flex;
         flex-direction: column;
         width: 100%;
         padding: 0;
@@ -603,11 +610,14 @@ body.theme-christmas .snowflake {
         border-bottom: none;
     }
     
-.main-nav-desktop a {
+    .main-nav-desktop a {
         display: block;
         width: 100%;
-        margin: 5px 0;
+        margin: 0;
+        padding: 15px 0;
         text-align: center;
+        color: inherit;
+        border: none; 
     }
     
     .main-nav-desktop a::after {
