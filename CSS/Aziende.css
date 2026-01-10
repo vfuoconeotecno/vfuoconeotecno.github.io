@@ -121,11 +121,20 @@ body {
 }
 
 
-.monthly-report-table tbody tr:nth-child(even) {
-    background-color: #222222;
+.theme-light .monthly-report-table tbody tr:nth-child(even),
+.theme-christmas .monthly-report-table tbody tr:nth-child(even) {
+    background-color: #7a7a7a;
 }
-.monthly-report-table tbody tr:nth-child(odd) {
-    background-color: #2c2c2c;
+.theme-light .monthly-report-table tbody tr:nth-child(odd),
+.theme-christmas .monthly-report-table tbody tr:nth-child(odd) {
+    background-color: #e6e6e6;
+}
+
+.theme-dark .monthly-report-table tbody tr:nth-child(even) {
+    background-color: #141414;
+}
+.theme-dark .monthly-report-table tbody tr:nth-child(odd) {
+    background-color: #363636;
 }
 
 .monthly-report-table .data-value {
@@ -381,7 +390,7 @@ body {
 }
 .theme-light .azienda,
 .theme-christmas .azienda {
-    color: #333333;
+    color: #ffffff;
     text-shadow: none;
 }
 .theme-christmas .azienda {

@@ -78,10 +78,6 @@ img {
     align-items: center;
     gap: 8px;
     font-size: 1.8rem;
-    
-    /* MODIFICA: Bilanciamento Flexbox. 
-       Diamo al logo una larghezza di base fissa (es. 250px)
-       in modo che lo spazio per il titolo sia simmetrico. */
     flex-basis: 250px; 
     flex-shrink: 0;
 }
@@ -97,16 +93,9 @@ img {
     justify-content: flex-end;
     align-items: center;
     gap: 10px;
-    
-    /* MODIFICA: Bilanciamento Flexbox. 
-       Diamo ai controlli la stessa larghezza di base del logo. */
     flex-basis: 250px; 
     flex-shrink: 0;
 }
-
-/* =========================================================================
- * MENU HAMBURGER (PER JS)
- * ========================================================================= */
 
 .menu {
     /* Manteniamo display: none; qui solo se l'hamburger deve apparire SOLO in mobile */
@@ -541,8 +530,6 @@ body.theme-christmas .snowflake {
     .header-title {
         font-size: 0.8rem;
         order: 2;
-        /* Rimuoviamo il display: none; che avevi in fondo alla media query,
-           ora usiamo order: 2; come avevi impostato */
     }
 
     .logo {
@@ -563,10 +550,7 @@ body.theme-christmas .snowflake {
         display: block; 
         position: fixed; 
         top: 12vh;
-        
-        /* MODIFICA: Avviciniamo il menu al bordo per evitare lo scroll orizzontale */
         right: 10px; 
-        
         z-index: 1000;
     }
     
@@ -582,13 +566,11 @@ body.theme-christmas .snowflake {
     .header-bottom {
         display: block; 
         padding-top: 0;
-        
         position: absolute;
         width: 100%;
         top: 100px; 
         left: 0;
         z-index: 40; 
-        
         visibility: hidden;
         opacity: 0;
         transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -656,4 +638,40 @@ body.theme-christmas .snowflake {
      .header-title {
         display: none; 
     } 
+
+    @property --angle {
+    syntax: '<angle>';
+    initial-value: 90deg;
+    inherits: false;
+    }
+
+    @keyframes borderRotate {
+        0% {
+            --angle: 90deg;
+        }
+        100% {
+            --angle: 450deg;
+        }
+    }
+
+    .main-nav-desktop a {
+        color: white; 
+        display: inline-block;
+        position: relative; 
+        padding: 10px 15px;
+        border: 1px solid transparent; 
+        border-image: none;
+        animation: borderRotate 2s linear infinite paused;
+    }
+
+    .main-nav-desktop a:hover {
+        border-image: conic-gradient(
+            from var(--angle),
+            rgba(168, 239, 255, 0.1),
+            rgb(85, 9, 9) 0.1turn,
+            rgb(85, 9, 9) 0.15turn,
+            rgba(168, 239, 255, 0.1) 0.25turn
+        ) 1;
+        animation-play-state: running;
+    }
 }

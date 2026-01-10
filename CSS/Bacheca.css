@@ -13,7 +13,6 @@ body {
     background-position: center center;
 }
 
-
 /* HEADER */
 .theme-light .main-header {
     background-color: rgba(231, 231, 231);
@@ -58,26 +57,28 @@ body {
 }
 /* HEADER */
 
-.main-header.scrolled {
-    height: 80px;
-    padding: 0;
-}
+@media screen and (min-width: 992px) {
+    .main-header.scrolled {
+        height: 80px;
+        padding: 0;
+    }
 
-.main-header.scrolled .header-top {
-    align-items: center;
-    height: 100%;
-}
+    .main-header.scrolled .header-top {
+        align-items: center;
+        height: 100%;
+    }
 
-.main-header.scrolled .header-bottom {
-    opacity: 0;
-    height: 0;
-    transition: height 0.4s ease-out;
-    pointer-events: none;
-}
+    .main-header.scrolled .header-bottom {
+        opacity: 0;
+        height: 0;
+        transition: height 0.4s ease-out;
+        pointer-events: none;
+    }
 
-.main-header.scrolled .logo img {
-    height: 4rem;
-    transition: height 0.4s ease-out;
+    .main-header.scrolled .logo img {
+        height: 4rem;
+        transition: height 0.4s ease-out;
+    }
 }
 
 /* TORNA SU */
