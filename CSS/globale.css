@@ -524,37 +524,37 @@ body.theme-christmas .snowflake {
 }
 
 @media (max-width: 768px) {
+    body.menu-open .header-bottom {
+        visibility: visible;
+        opacity: 1;
+    }
+
     .header-top {
         padding: 5px 10px; 
     }
 
-    .header-title {
-        font-size: 0.8rem;
-        order: 2;
-    }
+    .header-title { display: none; } 
+        .logo img { height: 3.5rem; } 
 
     .logo {
         order: 1;
     }
 
-    .logo img {
-        height: 5rem;
-        width: 5rem;
-    }
+
 
     .header-right-controls {
         order: 3;
         gap: 5px;
     }
     
-.menu {
-    display: block; 
-    position: fixed; 
-    top: 12vh;
-    z-index: 1000;
-    left: 50%; 
-    transform: translateX(-50%);
-}
+    .menu {
+        display: block; 
+        position: fixed; 
+        top: 12vh;
+        z-index: 1000;
+        left: 50%; 
+        transform: translateX(-50%);
+    }
     
     .theme-switcher {
         gap: 15px;
@@ -566,17 +566,15 @@ body.theme-christmas .snowflake {
     }
     
     .header-bottom {
-        display: block; 
-        padding-top: 0;
         position: absolute;
-        width: 100%;
-        top: 100px; 
+        top: 100%;
         left: 0;
-        z-index: 40; 
+        width: 100%;
+        background-color: inherit;
+        z-index: 999;
         visibility: hidden;
         opacity: 0;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
-        background-color: inherit; 
+        transition: opacity 0.3s, visibility 0.3s;
     }
     
     body.menu-open .header-bottom {
@@ -588,13 +586,15 @@ body.theme-christmas .snowflake {
         display: block; 
     }
     
-    .main-nav-desktop ul {
+.main-nav-desktop ul {
         flex-direction: column;
-        align-items: stretch;
-        padding: 10px 0;
+        width: 100%;
+        padding: 0;
+        margin: 0;
     }
     
     .main-nav-desktop li {
+        width: 100%;
         margin: 0;
         border-bottom: 1px solid rgba(190, 190, 190, 0.2); 
     }
@@ -603,11 +603,11 @@ body.theme-christmas .snowflake {
         border-bottom: none;
     }
     
-    .main-nav-desktop a {
-        padding: 15px;
-        justify-content: center; 
+.main-nav-desktop a {
+        display: block;
         width: 100%;
-        display: flex; 
+        margin: 5px 0;
+        text-align: center;
     }
     
     .main-nav-desktop a::after {
