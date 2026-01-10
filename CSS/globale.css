@@ -625,23 +625,17 @@ body.theme-christmas .snowflake {
     }
 
     /* FOOTER MOBILE */
-    .main-footer {
-        padding: 10px 0; 
-    }
+    .main-footer { padding: 10px 0; width: 100%; box-sizing: border-box;}
 
     .footer-container {
         flex-direction: column;
         text-align: center;
-        gap: 5px; 
+        gap: 15px; 
+        padding: 0 10px;
     }
     
-    .footer-links {
-        margin-top: 5px;
-    }
-
-    .footer-links a {
-        padding: 0 5px;
-    }
+    .footer-links { margin-top: 5px; display: flex; justify-content: center; gap: 10px;}
+    .footer-links a { padding: 5px; }
 
     .loader span {
         width: 10px;
