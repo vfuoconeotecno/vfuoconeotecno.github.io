@@ -189,12 +189,6 @@ img[src*="Niente.png"] {
     cursor: default;
 }
 
-/* =========================================
-   VISUALIZZAZIONE "MAPPA" MOBILE (FIXED)
-   ========================================= */
-/* =========================================
-   VISUALIZZAZIONE "MAPPA" MOBILE (DEFINITIVA JS)
-   ========================================= */
 @media screen and (max-width: 768px) {
     
     html, body {
@@ -202,9 +196,9 @@ img[src*="Niente.png"] {
         height: 100%;
         margin: 0;
         padding: 0;
-        overflow: hidden; /* BLOCCA lo scroll nativo del telefono */
-        touch-action: none; /* Disabilita zoom e gesti standard del browser */
-        position: fixed; /* Blocca la pagina */
+        overflow: hidden;
+        touch-action: none;
+        position: fixed;
     }
 
     /* Il contenitore che muoveremo con JS */
@@ -213,19 +207,18 @@ img[src*="Niente.png"] {
         flex-direction: column;
         align-items: center;
         
-        position: absolute; /* Assoluto per muoverlo con coordinate X,Y */
+        position: absolute;
         top: 0;
         left: 0;
         will-change: transform;
-        width: max-content; /* Larghezza automatica in base al contenuto */
-        transform-origin: 0 0; /* Le coordinate partono dall'angolo in alto a sx */
+        width: max-content;
+        transform-origin: 0 0;
         transition: none;
         padding: 50px;
         box-sizing: border-box;
         cursor: grab;
     }
 
-    /* FORZA LA VISIBILITÀ DI TUTTE LE LINEE E BOX */
     .Livello:not(:first-child)::before,
     .Gruppo::before,
     .Livello:not(:first-child) .Ruolo-Box::before {
@@ -236,7 +229,6 @@ img[src*="Niente.png"] {
         display: none !important;
     }
 
-    /* Ripristina layout orizzontale */
     .Gruppo {
         display: inline-flex !important;
         flex-direction: row !important;
