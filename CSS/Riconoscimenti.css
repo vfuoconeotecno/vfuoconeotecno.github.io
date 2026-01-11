@@ -8,179 +8,204 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-image: url('../Immagini/Sfondi/Onorificenze.png');
+    background-image:  url('../Immagini/Sfondi/Onorificenze.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover; 
-    background-position: center center;
-    overflow-x: hidden;
+    background-position: center;
+    color: #e0e0e0;
 }
 
 body::-webkit-scrollbar {
-  width: 8px;
-}
-
-body::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-body::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.3);
-  border-radius: 4px;
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 .main-layout {
     display: flex;
     justify-content: center;
-    align-items: flex-start; 
     width: 100%;
-    padding: 120px 20px 60px 20px; 
+    padding: 140px 20px 80px;
     box-sizing: border-box;
-    min-height: 100vh;
 }
 
 .skins-container {
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 25px;
     width: 100%;
-    height: auto;
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
 }
 
 .player-row {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    transition: all 0.5s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(25, 20, 20, 0.9);
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
+
+.player-row:hover {
+    transform: translateY(-2px);
+    transform: scale(1.02);
+}
+
+.player-row.active {
+    background: rgba(25, 20, 20, 0.9);
+    border-color: #610000;
+    box-shadow: 0 0 25px rgba(183, 28, 28, 0.2);
+    transform: scale(1.02);
+    z-index: 10;
+}
+
+.player-row.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, #610000, #c70000);
+}
+
 
 .skin-card {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 10px;
-    cursor: pointer; 
-    transition: transform 0.3s ease;
-    position: relative;
-    z-index: 2;
-}
-
-.skin-card:hover {
-    transform: scale(1.05);
-}
-
-.player-row.active .skin-card {
-    transform: scale(1.05);
+    justify-content: space-between;
+    width: 100%;
+    cursor: pointer;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
 .skin-img {
-    display: block;
-    height: 500px; 
+    height: 150px;
     width: auto;
-    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.6));
-    transition: all 0.3s ease;
+    filter: drop-shadow(0 5px 8px rgba(0,0,0,0.5));
+    transition: all 0.5s ease;
+    object-fit: contain;
+    order: 2;
 }
 
 .skin-card p {
-    margin: 15px 0 0 0;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
     font-weight: 700;
     color: #ffffff;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-    letter-spacing: 1px;
-    font-size: 1.8rem;
-    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0;
+    order: 1;
+    transition: color 0.3s;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.player-row.active .skin-img {
+    height: 350px;
+    filter: drop-shadow(0 15px 20px rgba(0,0,0,0.7));
+}
+
+.player-row.active .skin-card p {
+    color: #fff;
+    font-size: 2rem;
+}
+
+.player-row.active .skin-card {
+    flex-direction: column;
+    gap: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
 .medals-panel {
-    width: 100%;
     max-height: 0;
     opacity: 0;
     overflow: hidden;
-    background: rgba(0, 0, 0, 0.4);
-    border-radius: 20px;
-    margin-top: 0;
-    transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.5s ease,
-                margin-top 0.5s ease,
-                padding 0.5s ease;
+    transition: max-height 0.6s ease-in-out, opacity 0.4s ease-in-out;
+    width: 100%;
 }
 
 .player-row.active .medals-panel {
     max-height: 2000px;
     opacity: 1;
-    margin-top: 30px;
-    padding: 30px;
-    box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
-    border: 1px solid rgba(255,255,255,0.1);
+    margin-top: 20px;
+    padding-top: 20px;
 }
 
 .medals-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); 
+    gap: 25px;
     width: 100%;
-    justify-items: center;
 }
 
 .medals-grid a {
     text-decoration: none;
-    display: block;
-    width: 100%;
+    color: inherit;
 }
 
 .medal-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
-    gap: 15px;
-    padding: 10px;
-    transition: transform 0.3s;
+    gap: 12px;
+    transition: transform 0.3s, background 0.3s;
+    height: 97%;
 }
 
 .medal-item:hover {
     transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.08);
 }
 
 .medal-item img {
-    width: 60px;
+    width: 50px;
     height: auto;
-    filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5));
+    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.2));
 }
 
 .medal-item p {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     line-height: 1.4;
+    text-align: center;
     margin: 0;
-    font-weight: 600;
+    font-weight: 500;
 }
 
-p.gold { color: #FFD700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
-p.silver { color: #C0C0C0; text-shadow: 0 0 10px rgba(192, 192, 192, 0.3); }
-p.bronze { color: #CD7F32; text-shadow: 0 0 10px rgba(205, 127, 50, 0.3); }
+p.gold { color: #FFD700; text-shadow: 0 0 15px rgba(255, 215, 0, 0.4); }
+p.silver { color: #E0E0E0; text-shadow: 0 0 15px rgba(224, 224, 224, 0.4); }
+p.bronze { color: #CD7F32; text-shadow: 0 0 15px rgba(205, 127, 50, 0.4); }
 
 
 @media (max-width: 768px) {
-    .main-layout {
+    .main-layout { 
         padding-top: 100px;
+        padding-bottom: 180px; 
     }
     
-    .skin-img {
-        height: 200px;
+    .skin-card {
+        padding: 0;
     }
+    
+    .skin-card p { font-size: 1.1rem; }
+    .skin-img { height: 100px; }
+
+    .player-row.active .skin-card p { font-size: 1.5rem; }
+    .player-row.active .skin-img { height: 250px; }
     
     .medals-grid {
-        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-        gap: 20px;
-    }
-
-    .player-row.active .medals-panel {
-        padding: 20px 10px;
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 15px;
     }
 }
