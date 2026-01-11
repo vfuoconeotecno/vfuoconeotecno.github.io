@@ -1,3 +1,6 @@
+/* =========================================================================
+   RESET E STILI BASE
+   ========================================================================= */
 html, body {
     height: 100%;
     margin: 0;
@@ -14,15 +17,23 @@ body {
     background-attachment: fixed;
     background-size: cover; 
     background-position: center center;
+    
+    /* MODIFICA FONDAMENTALE: 
+       overflow-x hidden va bene per non scrollare a destra/sinistra.
+       MA overflow-y DEVE essere auto, altrimenti su mobile non puoi scorrere! */
     overflow-x: hidden;
-    overflow-y: hidden;;
+    overflow-y: auto; 
 }
 
+/* =========================================================================
+   CONTAINER GENERALE (DESKTOP DEFAULT)
+   ========================================================================= */
 .container {
     margin: auto;
     width: 90%;
     max-width: 1100px;
-    max-height: 100%;
+    /* Rimuoviamo max-height fisso per permettere al contenuto di espandersi */
+    height: auto; 
     padding: clamp(20px, 4vw, 50px);
     border-radius: 15px;
     display: flex;
@@ -31,21 +42,29 @@ body {
     justify-content: center;
     gap: clamp(20px, 5vw, 50px);
     transition: all 0.3s ease;
+    
+    /* Assicuriamoci che stia sopra lo sfondo */
+    position: relative;
+    z-index: 10;
 }
 
+/* --- TEMI COLORI --- */
 .theme-light .container {
-    background-color: rgba(214, 214, 214, 0.85);
+    background-color: rgba(214, 214, 214, 0.95); /* Leggermente più opaco per leggibilità */
     color: #000;
 }
 .theme-dark .container {
-    background-color: rgba(31, 31, 31, 0.85); 
+    background-color: rgba(31, 31, 31, 0.95); 
     color: #fff;
 }
 .theme-christmas .container {
-    background-color: rgba(105, 48, 48, 0.85);
+    background-color: rgba(105, 48, 48, 0.95);
     color: #fff;
 }
 
+/* =========================================================================
+   ELEMENTI INTERNI (TITOLI, IMMAGINI, TESTI)
+   ========================================================================= */
 .image-gallery-section {
     display: flex;
     flex-direction: column;
@@ -62,11 +81,13 @@ body {
 }
 
 #medal-title-text {
-    font-size: clamp(1.5rem, 4vw, 3rem); 
+    /* Clamp aiuta a scalare il font fluidamente tra minimo e massimo */
+    font-size: clamp(1.4rem, 4vw, 3rem); 
     font-family: 'Orbitron', sans-serif;
     margin: 0;
     line-height: 1.2;
     transition: color 0.5s ease;
+    word-wrap: break-word; /* Evita che parole lunghe rompano il layout */
 }
 
 #medal-title-text.gold { color: #CDA434; }
@@ -74,8 +95,9 @@ body {
 #medal-title-text.bronze { color: #cd7f32; }
 
 .medal-images-wrapper {
-    width: clamp(180px, 30vw, 350px);
-    height: clamp(180px, 30vw, 350px);
+    /* Dimensioni responsive base */
+    width: clamp(150px, 30vw, 350px);
+    height: clamp(150px, 30vw, 350px);
     position: relative;
     display: flex;
     justify-content: center;
@@ -109,7 +131,7 @@ body {
 }
 
 .description-section p {
-    font-size: clamp(1rem, 1.2vw, 1.4rem); 
+    font-size: clamp(0.95rem, 1.2vw, 1.4rem); 
     line-height: 1.6;
     margin: 0;
     font-style: italic;
@@ -125,13 +147,17 @@ body {
 .description-section.border-bronze { border-color: #cd7f32; }
 
 
+/* =========================================================================
+   MEDIA QUERY: DESKTOP (> 900px)
+   ========================================================================= */
 @media (min-width: 900px) {
-    
     .container {
         flex-direction: row; 
         justify-content: space-between;
         align-items: center;
         text-align: left;
+        /* Su desktop usiamo margin auto per centrare perfettamente */
+        margin: auto; 
     }
 
     .image-gallery-section {
@@ -155,10 +181,125 @@ body {
     .description-section.border-bronze { border-left-color: #cd7f32; }
 }
 
-@media (max-width: 768px) {
+
+/* =========================================================================
+   MEDIA QUERY: MOBILE / TABLET (< 900px) - IL PUNTO CRITICO
+   ========================================================================= */
+@media (max-width: 899px) {
+    
     .container {
-        width: 80%;
-        margin-top: 120px;
-        margin-bottom: 60px;
+        width: 90%; 
+        max-width: 450px; /* Non troppo largo su tablet */
+        
+        /* SIMMETRIA E RESPONSIVITÀ:
+           Usiamo 12vh (12% dell'altezza schermo) sia sopra che sotto.
+           In questo modo il box è centrato verticalmente nello spazio disponibile.
+           Grazie a overflow-y: auto sul body, se lo schermo è troppo piccolo,
+           l'utente può scorrere senza che il box venga tagliato. */
+        margin-top: 12vh;
+        margin-bottom: 12vh;
+        
+        margin-left: auto;
+        margin-right: auto;
+        
+        padding: 25px;
+        box-sizing: border-box;
     }
+
+    /* Sistemiamo il titolo per mobile */
+    #medal-title-text {
+        font-size: 1.4rem; /* Dimensione fissa leggibile ma non enorme */
+        margin-bottom: 10px;
+    }
+
+    /* Contenitore immagine più compatto */
+    .medal-images-wrapper {
+        width: 160px;  /* Dimensione fissa ideale per mobile */
+        height: 160px;
+        margin-bottom: 15px;
+    }
+
+    .image-gallery-section {
+        margin-bottom: 10px;
+    }
+
+    /* Descrizione leggibile e non attaccata ai bordi */
+    .description-section {
+        padding-top: 15px;
+        border-top-width: 1px; /* Linea più sottile su mobile */
+    }
+    
+    .description-section p {
+        font-size: 0.95rem;
+    }
+    
+}
+
+/* =======================================================
+   MOBILE FIX DEFINITIVO (Copia e sostituisci questo blocco)
+   ======================================================= */
+@media (max-width: 768px) {
+
+    /* 1. SBLOCCO PAGINA */
+    /* Fondamentale: permette di scorrere se il telefono è piccolo */
+    body {
+        overflow-y: auto !important; 
+        height: auto !important;
+        min-height: 100vh;
+        display: block; /* Rimuove flex che centrava forzatamente */
+    }
+
+    /* 2. IL RIQUADRO (LA CARD) */
+    .container {
+        width: 90% !important;
+        max-width: 400px;
+        
+        /* Margini sicuri: 
+           110px sopra (per non finire sotto il menu/logo)
+           50px sotto (per non toccare il footer) */
+        margin: 110px auto 50px auto !important;
+        
+        /* L'altezza si deve adattare al contenuto! */
+        height: auto !important; 
+        min-height: auto !important;
+        
+        padding: 20px !important;
+        display: block !important; /* Disattiva flex orizzontale del desktop */
+    }
+
+    /* 3. TITOLO (Ridotto per non occupare mezza pagina) */
+    #medal-title-text {
+        font-size: 1.4rem !important; /* Molto più piccolo e leggibile */
+        margin-bottom: 10px !important;
+        line-height: 1.2 !important;
+    }
+
+    /* 4. IMMAGINE (Contenuta) */
+    .image-gallery-section {
+        margin-bottom: 10px !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .medal-images-wrapper {
+        width: 130px !important;  /* Immagine più piccola */
+        height: 130px !important;
+        margin: 0 auto 10px auto !important;
+    }
+
+    /* 5. DESCRIZIONE (Testo che non esce dai bordi) */
+    .description-section {
+        width: 100% !important;
+        padding-top: 10px !important;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        text-align: center !important;
+    }
+
+    .description-section p {
+        font-size: 0.9rem !important; /* Testo compatto */
+        line-height: 1.4 !important;
+        white-space: normal !important; /* Forza a capo il testo lungo */
+    }
+
 }
