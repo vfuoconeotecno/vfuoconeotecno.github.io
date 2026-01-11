@@ -238,23 +238,29 @@ body {
 /* =======================================================
    MOBILE FIX DEFINITIVO (Copia e sostituisci questo blocco)
    ======================================================= */
-/* =======================================================
-   MOBILE FIX: CENTRAMENTO VERTICALE PERFETTO
-   ======================================================= */
 @media (max-width: 768px) {
 
-    /* 1. SETUP BODY (IL GENITORE) */
-    /* Questo è il segreto: rendiamo il body una colonna flessibile */
+    /* 1. BLOCCO TOTALE DELLA PAGINA */
+    /* Questo impedisce lo scroll della pagina intera. 
+       Tutto ciò che esce dallo schermo viene tagliato via. */
+    html, body {
+        height: 100% !important;
+        overflow: hidden !important; /* STOP SCROLL PAGINA */
+        width: 100%;
+        position: fixed; /* Inchioda la pagina */
+    }
+
     body {
         display: flex !important;
         flex-direction: column !important;
-        min-height: 100vh !important; /* Occupa ALMENO tutto lo schermo */
-        overflow-y: auto !important;   /* Abilita lo scroll se serve */
+        justify-content: space-between !important; /* Header in cima, Footer in fondo */
+        background-attachment: scroll !important; /* Fix per mobile background */
     }
 
-    /* Gestione Header e Footer per non farli schiacciare */
+    /* Evitiamo che Header e Footer vengano schiacciati */
     .main-header, .main-footer {
-        flex-shrink: 0; /* Impedisce che si rimpiccioliscano */
+        flex-shrink: 0; 
+        z-index: 20;
     }
 
     /* 2. IL RIQUADRO (LA CARD) */
@@ -262,55 +268,61 @@ body {
         width: 90% !important;
         max-width: 400px;
         
-        /* CENTRAMENTO MAGICO:
-           'margin: auto' in un display flex distribuisce lo spazio vuoto
-           ugualmente sopra e sotto. Questo lo centra PERFETTAMENTE tra
-           header e footer. */
+        /* CENTRAMENTO ASSOLUTO */
         margin: auto !important; 
         
-        /* Altezza adattiva come richiesto */
-        height: auto !important; 
+        /* LIMITI DI GRANDEZZA */
+        /* Non diventare mai più alto del 70% dello schermo.
+           Così lasci spazio a Header e Footer. */
+        max-height: 70vh !important; 
         
-        padding: 20px !important;
-        display: block !important; 
+        /* SCROLL INTERNO (SOLUZIONE MAGICA) */
+        /* Se il testo è troppo lungo, appare la barra di scorrimento SOLO QUI DENTRO.
+           La pagina fuori resta ferma. */
+        overflow-y: auto !important; 
         
-        /* Assicuriamoci che non tocchi troppo i bordi su schermi bassissimi */
-        margin-top: auto !important;
-        margin-bottom: auto !important;
+        padding: 15px !important;
+        display: block !important;
+        
+        /* Estetica scrollbar (opzionale, per renderla più carina) */
+        scrollbar-width: thin; 
     }
 
-    /* 3. TITOLO */
+    /* 3. ADATTAMENTO TESTI (Compatti) */
     #medal-title-text {
-        font-size: 1.4rem !important;
-        margin-bottom: 10px !important;
-        line-height: 1.2 !important;
+        font-size: 1.3rem !important; 
+        margin-bottom: 8px !important;
+        line-height: 1.1 !important;
+        margin-top: 0 !important;
     }
 
-    /* 4. IMMAGINE */
+    /* 4. IMMAGINE (Più piccola per lasciare spazio al testo) */
     .image-gallery-section {
-        margin-bottom: 10px !important;
+        margin-bottom: 5px !important;
         display: flex;
         flex-direction: column;
         align-items: center;
+        flex-shrink: 0; /* L'immagine non si deve schiacciare */
     }
 
     .medal-images-wrapper {
-        width: 130px !important;
-        height: 130px !important;
-        margin: 0 auto 10px auto !important;
+        width: 110px !important; /* Ridotta un po' per far entrare tutto */
+        height: 110px !important;
+        margin: 0 auto 5px auto !important;
     }
 
     /* 5. DESCRIZIONE */
     .description-section {
         width: 100% !important;
-        padding-top: 10px !important;
+        padding-top: 8px !important;
         border-top: 1px solid rgba(255,255,255,0.1);
         text-align: center !important;
     }
 
     .description-section p {
-        font-size: 0.9rem !important;
-        line-height: 1.4 !important;
+        font-size: 0.85rem !important;
+        line-height: 1.3 !important;
         white-space: normal !important;
+        padding-bottom: 5px; /* Un po' di spazio alla fine dello scroll interno */
     }
 }
