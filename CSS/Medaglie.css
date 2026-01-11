@@ -1,6 +1,3 @@
-/* =========================================================================
-   RESET E STILI BASE
-   ========================================================================= */
 html, body {
     height: 100%;
     margin: 0;
@@ -17,22 +14,14 @@ body {
     background-attachment: fixed;
     background-size: cover; 
     background-position: center center;
-    
-    /* MODIFICA FONDAMENTALE: 
-       overflow-x hidden va bene per non scrollare a destra/sinistra.
-       MA overflow-y DEVE essere auto, altrimenti su mobile non puoi scorrere! */
     overflow-x: hidden;
     overflow-y: auto; 
 }
 
-/* =========================================================================
-   CONTAINER GENERALE (DESKTOP DEFAULT)
-   ========================================================================= */
 .container {
     margin: auto;
     width: 90%;
     max-width: 1100px;
-    /* Rimuoviamo max-height fisso per permettere al contenuto di espandersi */
     height: auto; 
     padding: clamp(20px, 4vw, 50px);
     border-radius: 15px;
@@ -42,15 +31,12 @@ body {
     justify-content: center;
     gap: clamp(20px, 5vw, 50px);
     transition: all 0.3s ease;
-    
-    /* Assicuriamoci che stia sopra lo sfondo */
     position: relative;
     z-index: 10;
 }
 
-/* --- TEMI COLORI --- */
 .theme-light .container {
-    background-color: rgba(214, 214, 214, 0.95); /* Leggermente più opaco per leggibilità */
+    background-color: rgba(214, 214, 214, 0.95);
     color: #000;
 }
 .theme-dark .container {
@@ -62,9 +48,6 @@ body {
     color: #fff;
 }
 
-/* =========================================================================
-   ELEMENTI INTERNI (TITOLI, IMMAGINI, TESTI)
-   ========================================================================= */
 .image-gallery-section {
     display: flex;
     flex-direction: column;
@@ -81,13 +64,12 @@ body {
 }
 
 #medal-title-text {
-    /* Clamp aiuta a scalare il font fluidamente tra minimo e massimo */
     font-size: clamp(1.4rem, 4vw, 3rem); 
     font-family: 'Orbitron', sans-serif;
     margin: 0;
     line-height: 1.2;
     transition: color 0.5s ease;
-    word-wrap: break-word; /* Evita che parole lunghe rompano il layout */
+    word-wrap: break-word;
 }
 
 #medal-title-text.gold { color: #CDA434; }
@@ -95,7 +77,6 @@ body {
 #medal-title-text.bronze { color: #cd7f32; }
 
 .medal-images-wrapper {
-    /* Dimensioni responsive base */
     width: clamp(150px, 30vw, 350px);
     height: clamp(150px, 30vw, 350px);
     position: relative;
@@ -146,17 +127,12 @@ body {
 .description-section.border-silver { border-color: #c0c0c0; }
 .description-section.border-bronze { border-color: #cd7f32; }
 
-
-/* =========================================================================
-   MEDIA QUERY: DESKTOP (> 900px)
-   ========================================================================= */
 @media (min-width: 900px) {
     .container {
         flex-direction: row; 
         justify-content: space-between;
         align-items: center;
         text-align: left;
-        /* Su desktop usiamo margin auto per centrare perfettamente */
         margin: auto; 
     }
 
@@ -181,40 +157,26 @@ body {
     .description-section.border-bronze { border-left-color: #cd7f32; }
 }
 
-
-/* =========================================================================
-   MEDIA QUERY: MOBILE / TABLET (< 900px) - IL PUNTO CRITICO
-   ========================================================================= */
 @media (max-width: 899px) {
     
     .container {
         width: 90%; 
-        max-width: 450px; /* Non troppo largo su tablet */
-        
-        /* SIMMETRIA E RESPONSIVITÀ:
-           Usiamo 12vh (12% dell'altezza schermo) sia sopra che sotto.
-           In questo modo il box è centrato verticalmente nello spazio disponibile.
-           Grazie a overflow-y: auto sul body, se lo schermo è troppo piccolo,
-           l'utente può scorrere senza che il box venga tagliato. */
+        max-width: 450px;
         margin-top: 12vh;
-        margin-bottom: 12vh;
-        
+        margin-bottom: 12vh;      
         margin-left: auto;
-        margin-right: auto;
-        
+        margin-right: auto;        
         padding: 25px;
         box-sizing: border-box;
     }
 
-    /* Sistemiamo il titolo per mobile */
     #medal-title-text {
-        font-size: 1.4rem; /* Dimensione fissa leggibile ma non enorme */
+        font-size: 1.4rem;
         margin-bottom: 10px;
     }
 
-    /* Contenitore immagine più compatto */
     .medal-images-wrapper {
-        width: 160px;  /* Dimensione fissa ideale per mobile */
+        width: 160px;
         height: 160px;
         margin-bottom: 15px;
     }
@@ -223,10 +185,9 @@ body {
         margin-bottom: 10px;
     }
 
-    /* Descrizione leggibile e non attaccata ai bordi */
     .description-section {
         padding-top: 15px;
-        border-top-width: 1px; /* Linea più sottile su mobile */
+        border-top-width: 1px;
     }
     
     .description-section p {
@@ -235,60 +196,38 @@ body {
     
 }
 
-/* =======================================================
-   MOBILE FIX DEFINITIVO (Copia e sostituisci questo blocco)
-   ======================================================= */
 @media (max-width: 768px) {
 
-    /* 1. BLOCCO TOTALE DELLA PAGINA */
-    /* Questo impedisce lo scroll della pagina intera. 
-       Tutto ciò che esce dallo schermo viene tagliato via. */
     html, body {
         height: 100% !important;
-        overflow: hidden !important; /* STOP SCROLL PAGINA */
+        overflow: hidden !important;
         width: 100%;
-        position: fixed; /* Inchioda la pagina */
+        position: fixed;
     }
 
     body {
         display: flex !important;
         flex-direction: column !important;
-        justify-content: space-between !important; /* Header in cima, Footer in fondo */
-        background-attachment: scroll !important; /* Fix per mobile background */
+        justify-content: space-between !important;
+        background-attachment: scroll !important;
     }
 
-    /* Evitiamo che Header e Footer vengano schiacciati */
     .main-header, .main-footer {
         flex-shrink: 0; 
         z-index: 20;
     }
 
-    /* 2. IL RIQUADRO (LA CARD) */
     .container {
         width: 90% !important;
         max-width: 400px;
-        
-        /* CENTRAMENTO ASSOLUTO */
         margin: auto !important; 
-        
-        /* LIMITI DI GRANDEZZA */
-        /* Non diventare mai più alto del 70% dello schermo.
-           Così lasci spazio a Header e Footer. */
         max-height: 70vh !important; 
-        
-        /* SCROLL INTERNO (SOLUZIONE MAGICA) */
-        /* Se il testo è troppo lungo, appare la barra di scorrimento SOLO QUI DENTRO.
-           La pagina fuori resta ferma. */
         overflow-y: auto !important; 
-        
         padding: 15px !important;
         display: block !important;
-        
-        /* Estetica scrollbar (opzionale, per renderla più carina) */
         scrollbar-width: thin; 
     }
 
-    /* 3. ADATTAMENTO TESTI (Compatti) */
     #medal-title-text {
         font-size: 1.3rem !important; 
         margin-bottom: 8px !important;
@@ -296,22 +235,20 @@ body {
         margin-top: 0 !important;
     }
 
-    /* 4. IMMAGINE (Più piccola per lasciare spazio al testo) */
     .image-gallery-section {
         margin-bottom: 5px !important;
         display: flex;
         flex-direction: column;
         align-items: center;
-        flex-shrink: 0; /* L'immagine non si deve schiacciare */
+        flex-shrink: 0;
     }
 
     .medal-images-wrapper {
-        width: 110px !important; /* Ridotta un po' per far entrare tutto */
+        width: 110px !important; 
         height: 110px !important;
         margin: 0 auto 5px auto !important;
     }
 
-    /* 5. DESCRIZIONE */
     .description-section {
         width: 100% !important;
         padding-top: 8px !important;
@@ -323,6 +260,6 @@ body {
         font-size: 0.85rem !important;
         line-height: 1.3 !important;
         white-space: normal !important;
-        padding-bottom: 5px; /* Un po' di spazio alla fine dello scroll interno */
+        padding-bottom: 5px;
     }
 }

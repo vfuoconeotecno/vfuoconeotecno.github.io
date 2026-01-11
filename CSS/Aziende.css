@@ -1,7 +1,3 @@
-/* =========================================================================
- * STILI GENERALI E RESPONSIVITÀ DI BASE
- * ========================================================================= */
-
 body {
     font-family: 'Montserrat', sans-serif;
     font-size: 22px;
@@ -70,12 +66,7 @@ body {
     background-repeat: no-repeat;
 }
 
-/* =========================================================================
- * TABELLA - STILI BASE E RESPONSIVITÀ PER MOBILE
- * ========================================================================= */
-
 .monthly-report-table {
-    /* Rimosso min-width: 1000px per consentire lo stacking */
     border-collapse: collapse;
     border-spacing: 0;
     border: none;
@@ -96,8 +87,13 @@ body {
     border: none;
 }
 
-.monthly-report-table thead {
+.theme-dark .monthly-report-table thead {
     background: linear-gradient(180deg, #2b2b2b 0%, #1c1c1c 100%);
+    color: #d3172d;
+}
+
+.theme-light .monthly-report-table thead {
+    background: linear-gradient(180deg, #8d8d8d 0%, #e0e0e0 100%);
     color: #d3172d;
 }
 
@@ -151,8 +147,12 @@ body {
     border-right: none;
 }
 
-.monthly-report-table .data-value:hover {
-    background-color: #383838;
+.theme-dark .monthly-report-table .data-value:hover {
+    box-shadow: inset 0 0 15px rgba(255, 0, 0, 0.2);
+    color: #d3172d;
+}
+
+.theme-light .monthly-report-table .data-value:hover {
     box-shadow: inset 0 0 15px rgba(255, 0, 0, 0.2);
     color: #d3172d;
 }
@@ -163,11 +163,6 @@ body {
 .monthly-report-table tbody tr:last-child .data-value:last-child {
     border-bottom-right-radius: 10px;
 }
-
-/* =========================================================================
- * MEDIA QUERY: Visualizzazione Orizzontale (Desktop/Tablet landscape)
- * Si attiva per schermi più larghi di 768px.
- * ========================================================================= */
 
 @media (min-width: 768px) {
     .monthly-report-table {
@@ -334,15 +329,12 @@ body {
         overflow-x: hidden;
     }
 
-    /* Riduciamo lo spazio del footer e del contenitore */
     .theme-light .content,
     .theme-christmas .content,
     .theme-dark .content {
         padding-bottom: 20px; 
         min-height: auto;
     }
-
-    /* Intestazioni più compatte */
     .header-titoli {
         flex-direction: column;
         gap: 0;
@@ -356,25 +348,21 @@ body {
         margin: 2px 0;
     }
 
-    /* --- CONTENITORE TABELLA --- */
     .monthly-report-table {
         margin: 0 auto;
-        width: 95%; /* Allarghiamo un po' per far stare bene testo e numero */
+        width: 95%;
         max-width: 400px; 
+        border-radius: 50px;
     }
 
     .monthly-report-table thead { display: none; }
     .monthly-report-table tbody { display: block; width: 100%; }
 
-    /* --- RIGHE (IL BLOCCO DEI MESI) --- */
     .monthly-report-table tr {
         display: flex;
         flex-direction: column;
         width: 100%;
-        
-        /* Spazio elastico tra i mesi (vh) */
-        margin-bottom: 0.8vh; 
-        
+        margin-bottom: 0.8vh;    
         border-radius: 8px;
         overflow: hidden;
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
@@ -385,19 +373,14 @@ body {
         margin-bottom: 0;
     }
 
-    /* --- CELLE (MESE + NUMERO SULLA STESSA RIGA) --- */
     .monthly-report-table td {
         display: flex; 
-        flex-direction: row; /* FORZA la direzione orizzontale */
-        align-items: center; /* Centra verticalmente */
-        justify-content: space-between; /* Mese a sinistra, numero a destra */
-        flex-wrap: nowrap; /* IMPEDISCE di andare a capo */
-        
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: nowrap;    
         width: 100%;
-        
-        /* Padding elastico */
         padding: 1.2vh 15px; 
-        
         box-sizing: border-box;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         border-right: none !important;
@@ -406,15 +389,14 @@ body {
 
     .monthly-report-table td:last-child { border-bottom: none; }
 
-    /* --- IL VALORE (NUMERO) --- */
     .monthly-report-table .data-value {
         padding: 0; 
         text-align: center !important; 
         font-size: 1.1em;
         font-weight: 800;
-        display: inline-block; /* Importante: non block */
+        display: inline-block;
         border: none !important;
-        white-space: nowrap; /* Il numero non si spezza mai */
+        white-space: nowrap;
     }
     
     .monthly-report-table .data-value:hover {
@@ -427,19 +409,17 @@ body {
         border-radius: 0;
     }
 
-    /* --- NOMI DEI MESI (A SINISTRA) --- */
     .monthly-report-table td::before {
-        display: inline-block; /* Importante: non block */
+        display: inline-block;
         font-weight: 700;
         font-size: 0.9em;
         letter-spacing: 0.5px;
         text-transform: uppercase;
         opacity: 0.9;
-        margin-right: 10px; /* Un po' di aria tra testo e numero */
-        white-space: nowrap; /* Il mese non va a capo */
+        margin-right: 10px;
+        white-space: nowrap;
     }
 
-    /* LISTA MESI (Senza ":") */
     .monthly-report-table tr td:nth-child(1)::before { content: "Gennaio"; }
     .monthly-report-table tr td:nth-child(2)::before { content: "Febbraio"; }
     .monthly-report-table tr td:nth-child(3)::before { content: "Marzo"; }
@@ -453,7 +433,6 @@ body {
     .monthly-report-table tr td:nth-child(11)::before { content: "Novembre"; }
     .monthly-report-table tr td:nth-child(12)::before { content: "Dicembre"; }
 
-    /* --- GESTIONE COLORI TEMI --- */
     .theme-dark .monthly-report-table tr { background-color: #222222; }
     .theme-dark .monthly-report-table td::before { color: #d3172d; }
     .theme-dark .monthly-report-table .data-value { color: #ffffff; }

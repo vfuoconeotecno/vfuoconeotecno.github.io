@@ -1,126 +1,224 @@
-document.addEventListener('DOMContentLoaded', () => {
-    
-    const sliderContainer = document.querySelector('.slider-container');
-    const slides = document.querySelectorAll('.slide');
-    const prevBtn = document.querySelector('.prev-btn');
-    const nextBtn = document.querySelector('.next-btn');
-    const sliderDotsContainer = document.querySelector('.slider-dots');
+document.addEventListener("DOMContentLoaded", function () {
 
-    if (!sliderContainer || slides.length === 0) return;
+    const heroSliderModule = () => {
+        const heroSection = document.querySelector('.hero-slider');
+        if (!heroSection) return;
 
-    let currentSlide = 0;
-    const slideIntervalTime = 10000;
-    let slideTimer;
-    const totalSlides = slides.length;
+        const sliderContainer = heroSection.querySelector('.slider-container');
+        const slides = heroSection.querySelectorAll('.slide');
+        const prevBtn = heroSection.querySelector('.prev-btn');
+        const nextBtn = heroSection.querySelector('.next-btn');
+        const dotsContainer = heroSection.querySelector('.slider-dots');
 
-    const updateSlider = (index) => {
-        sliderContainer.style.transform = `translateX(${-index * 100}%)`;
-        
-        slides.forEach((slide, i) => {
-            slide.classList.remove('active');
-        });
-        slides[index].classList.add('active');
-        
-        updateDots(index);
-        currentSlide = index;
-    };
+        if (!sliderContainer || slides.length === 0) return;
 
-    const changeSlide = (direction) => {
-        let newIndex = currentSlide + direction;
-        
-        if (newIndex < 0) {
-            newIndex = totalSlides - 1;
-        } else if (newIndex >= totalSlides) {
-            newIndex = 0;
-        }
-        
-        updateSlider(newIndex);
-        resetTimer();
-    };
+        let currentSlide = 0;
+        let slideInterval;
+        const autoPlayTime = 7000;
 
-    const startTimer = () => {
-        slideTimer = setInterval(() => {
-            changeSlide(1);
-        }, slideIntervalTime);
-    };
-
-    const resetTimer = () => {
-        clearInterval(slideTimer);
-        startTimer();
-    };
-
-    const updateDots = (activeIndex) => {
-        sliderDotsContainer.innerHTML = '';
-        slides.forEach((_, i) => {
-            const dot = document.createElement('span');
+        if (dotsContainer) dotsContainer.innerHTML = '';
+        slides.forEach((_, index) => {
+            const dot = document.createElement('div');
             dot.classList.add('dot');
-            if (i === activeIndex) {
-                dot.classList.add('active');
-            }
+            if (index === 0) dot.classList.add('active');
             dot.addEventListener('click', () => {
-                updateSlider(i);
+                goToSlide(index);
                 resetTimer();
             });
-            sliderDotsContainer.appendChild(dot);
+            if (dotsContainer) dotsContainer.appendChild(dot);
         });
-    };
 
-    prevBtn.addEventListener('click', () => changeSlide(-1));
-    nextBtn.addEventListener('click', () => changeSlide(1));
+        const dots = heroSection.querySelectorAll('.dot');
 
-    updateSlider(currentSlide);
-    startTimer();
+        const goToSlide = (n) => {
+            if (n >= slides.length) currentSlide = 0;
+            else if (n < 0) currentSlide = slides.length - 1;
+            else currentSlide = n;
 
-    const scrollerContainer = document.querySelector('.scroller-container');
-    const scrollerPrevBtn = document.querySelector('.scroller-prev-btn');
-    const scrollerNextBtn = document.querySelector('.scroller-next-btn');
-    
-    if (!scrollerContainer || !scrollerPrevBtn || !scrollerNextBtn) return;
+            sliderContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
 
-    const cardWidth = 350;
-    const scrollIntervalTime = 5000;
-    let scrollPosition = 0;
-    let scrollerTimer;
-    
-    const maxScroll = scrollerContainer.scrollWidth - scrollerContainer.clientWidth;
+            dots.forEach(dot => dot.classList.remove('active'));
+            if (dots[currentSlide]) dots[currentSlide].classList.add('active');
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[currentSlide].classList.add('active');
+        };
 
-    const updateScroller = (direction) => {
-        let newPosition = scrollPosition + (direction * cardWidth);
-        
-        if (newPosition < 0) {
-            newPosition = maxScroll; 
-        } else if (newPosition > maxScroll) {
-            newPosition = 0; 
+        const nextSlide = () => goToSlide(currentSlide + 1);
+        const prevSlide = () => goToSlide(currentSlide - 1);
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                nextSlide();
+                resetTimer();
+            });
         }
-        
-        scrollPosition = newPosition;
-        
-        scrollerContainer.scrollTo({
-            left: scrollPosition,
-            behavior: 'smooth'
-        });
+        if (prevBtn) {
+            prevBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                prevSlide();
+                resetTimer();
+            });
+        }
+
+        const startTimer = () => {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, autoPlayTime);
+        };
+        const stopTimer = () => clearInterval(slideInterval);
+        const resetTimer = () => { stopTimer(); startTimer(); };
+
+        startTimer();
+
+        let startX = 0;
+        let isDragging = false;
+        const handleStart = (x) => { isDragging = true; startX = x; stopTimer(); };
+        const handleEnd = (x) => {
+            if (!isDragging) return;
+            isDragging = false;
+            const diff = startX - x;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) nextSlide(); else prevSlide();
+            }
+            startTimer();
+        };
+
+        sliderContainer.addEventListener('touchstart', (e) => handleStart(e.touches[0].pageX), {passive: true});
+        sliderContainer.addEventListener('touchend', (e) => handleEnd(e.changedTouches[0].pageX));
+        sliderContainer.addEventListener('mousedown', (e) => { e.preventDefault(); handleStart(e.pageX); });
+        sliderContainer.addEventListener('mouseup', (e) => handleEnd(e.pageX));
+
+        heroSection.addEventListener('wheel', (e) => {
+            stopTimer();
+            setTimeout(startTimer, 2000);
+        }, {passive: true});
     };
 
-    const startScrollerTimer = () => {
-        scrollerTimer = setInterval(() => {
-            updateScroller(1);
-        }, scrollIntervalTime);
-    };
+    const newsScrollerModule = () => {
+        const scrollerContainer = document.querySelector('.scroller-container');
+        if (!scrollerContainer) return;
 
-    const resetScrollerTimer = () => {
-        clearInterval(scrollerTimer);
+        const scrollAmount = 300;
+        const autoPlayTime = 6000;
+        let scrollerTimer;
+        let isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+        const startScrollerTimer = () => {
+            clearInterval(scrollerTimer);
+            scrollerTimer = setInterval(() => {
+                if (scrollerContainer.classList.contains('active')) return;
+
+                targetScroll = scrollerContainer.scrollLeft;
+
+                const maxScroll = scrollerContainer.scrollWidth - scrollerContainer.clientWidth;
+                if (scrollerContainer.scrollLeft >= maxScroll - 5) {
+                    scrollerContainer.scrollTo({ left: 0, behavior: 'smooth' });
+                    targetScroll = 0;
+                } else {
+                    scrollerContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                    targetScroll += scrollAmount;
+                }
+            }, autoPlayTime);
+        };
+
+        const stopScrollerTimer = () => clearInterval(scrollerTimer);
         startScrollerTimer();
+
+        scrollerContainer.addEventListener('touchstart', () => {
+            stopScrollerTimer();
+            scrollerContainer.classList.add('active');
+        }, {passive: true});
+
+        scrollerContainer.addEventListener('touchend', () => {
+            scrollerContainer.classList.remove('active');
+            targetScroll = scrollerContainer.scrollLeft;
+            setTimeout(startScrollerTimer, 2000);
+        });
+
+        const lerpFactor = 1;
+
+        let currentScroll = scrollerContainer.scrollLeft;
+        let targetScroll = scrollerContainer.scrollLeft;
+        let isAnimating = false;
+
+        const smoothLoop = () => {
+            if (!isAnimating) return;
+
+            currentScroll += (targetScroll - currentScroll) * lerpFactor;
+            scrollerContainer.scrollLeft = currentScroll;
+
+            if (Math.abs(targetScroll - currentScroll) > 0.5) {
+                requestAnimationFrame(smoothLoop);
+            } else {
+                isAnimating = false;
+                scrollerContainer.scrollLeft = targetScroll;
+            }
+        };
+
+        if (!isTouchDevice) {
+            let isDown = false;
+            let startX;
+            let startScrollLeft;
+
+            scrollerContainer.addEventListener('mousedown', (e) => {
+                isDown = true;
+                stopScrollerTimer();
+                scrollerContainer.classList.add('active');
+                startX = e.pageX - scrollerContainer.offsetLeft;
+                startScrollLeft = scrollerContainer.scrollLeft;
+
+                targetScroll = scrollerContainer.scrollLeft;
+                currentScroll = scrollerContainer.scrollLeft;
+                isAnimating = false;
+
+                scrollerContainer.style.cursor = 'grabbing';
+            });
+
+            const stopDrag = () => {
+                isDown = false;
+                scrollerContainer.classList.remove('active');
+                scrollerContainer.style.cursor = 'grab';
+                targetScroll = scrollerContainer.scrollLeft;
+                currentScroll = scrollerContainer.scrollLeft;
+                startScrollerTimer();
+            };
+
+            scrollerContainer.addEventListener('mouseleave', stopDrag);
+            scrollerContainer.addEventListener('mouseup', stopDrag);
+
+            scrollerContainer.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - scrollerContainer.offsetLeft;
+                const walk = (x - startX) * 2;
+                scrollerContainer.scrollLeft = startScrollLeft - walk;
+            });
+
+            scrollerContainer.addEventListener('wheel', (evt) => {
+                if (window.matchMedia("(hover: hover)").matches) {
+                    evt.preventDefault();
+                    stopScrollerTimer();
+
+                    if (!isAnimating) currentScroll = scrollerContainer.scrollLeft;
+
+                    const maxScroll = scrollerContainer.scrollWidth - scrollerContainer.clientWidth;
+                    const delta = evt.deltaY * 4.0;
+                    targetScroll += delta;
+
+                    targetScroll = Math.max(0, Math.min(targetScroll, maxScroll));
+
+                    if (!isAnimating) {
+                        isAnimating = true;
+                        requestAnimationFrame(smoothLoop);
+                    }
+
+                    clearTimeout(window.scrollTimeout);
+                    window.scrollTimeout = setTimeout(startScrollerTimer, 2000);
+                }
+            }, {passive: false});
+        }
     };
 
-    scrollerNextBtn.addEventListener('click', () => {
-        updateScroller(1);
-        resetScrollerTimer();
-    });
-
-    scrollerPrevBtn.addEventListener('click', () => {
-        updateScroller(-1);
-        resetScrollerTimer();
-    });
-
-    startScrollerTimer();
+    heroSliderModule();
+    newsScrollerModule();
 });
