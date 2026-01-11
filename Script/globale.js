@@ -78,6 +78,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeClasses = ['theme-light', 'theme-dark', 'theme-christmas'];
     const CHRISTMAS_MODE_PREFERENCE = 'christmasModeEnabled';
 
+    let metaThemeColor = document.querySelector("meta[name='theme-color']");
+    if (!metaThemeColor) {
+        metaThemeColor = document.createElement("meta");
+        metaThemeColor.name = "theme-color";
+        document.head.appendChild(metaThemeColor);
+    }
+
+    const updateMetaColor = (theme) => {
+        if (theme === 'theme-christmas') {
+            metaThemeColor.setAttribute("content", "#963E49");
+        } else if (theme === 'theme-light') {
+            metaThemeColor.setAttribute("content", "#E7E7E7");
+        } else {
+            metaThemeColor.setAttribute("content", "#0A0A0A");
+        }
+    };
+
     const getAudioPath = () => {
         const path = window.location.pathname;
         const s = path.split('/').filter(Boolean);
@@ -126,12 +143,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-
     const updateButtonsVisibility = (activeTheme) => {
         const isChristmasEnabled = localStorage.getItem(CHRISTMAS_MODE_PREFERENCE) !== 'false';
 
         if (!isChristmasEnabled) {
-            
             if (christmasButton) christmasButton.style.display = 'none';
 
             if (activeTheme === 'theme-light') {
@@ -141,7 +156,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (darkButton) darkButton.style.display = 'none';
                 if (lightButton) lightButton.style.display = ''; 
             }
-
         } else {
             if (christmasButton) christmasButton.style.display = '';
             if (lightButton) lightButton.style.display = '';
@@ -157,6 +171,8 @@ document.addEventListener('DOMContentLoaded', () => {
         
         syncAudio(name);
         updateButtonsVisibility(name);
+        
+        updateMetaColor(name);
     };
 
     const toggleChristmasMode = (enable) => {
