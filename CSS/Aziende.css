@@ -329,154 +329,97 @@ body {
 }
 
 @media (max-width: 768px) {
-    .theme-dark .monthly-report-table td::before {
-        color: #d3172d;
-    }
-    .theme-dark .monthly-report-table tbody tr:nth-child(even) {
-        background-color: #222222;
-    }
-    .theme-dark .monthly-report-table tbody tr:nth-child(odd) {
-        background-color: #2c2c2c;
-    }
-    .theme-dark .monthly-report-table .data-value {
-        color: #ffffff;
-    }
-}
-
-.theme-dark .monthly-report-table .data-value {
-    color: #ffffff;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    border-right: 1px solid rgba(255, 255, 255, 0.05);
-    transition: all 0.3s ease;
-}
-.theme-dark .monthly-report-table .data-value:hover {
-    background-color: #383838;
-    box-shadow: inset 0 0 15px rgba(255, 0, 0, 0.2);
-    color: #d3172d;
-}
-
-.theme-light .monthly-report-table,
-.theme-christmas .monthly-report-table {
-    background-color: #ffffff;
-}
-.theme-light .azienda,
-.theme-christmas .azienda {
-    color: #ffffff;
-    text-shadow: none;
-}
-.theme-christmas .azienda {
-    color: #963e49;
-}
-.theme-light .incendio,
-.theme-christmas .incendio {
-    color: #d3172d;
-    text-shadow: none;
-}
-.theme-light .monthly-report-table thead,
-.theme-christmas .monthly-report-table thead {
-    background: linear-gradient(180deg, #a7a7a7 0%, #ececec 100%);
-    color: #d3172d;
-}
-.theme-light .monthly-report-table th,
-.theme-christmas .monthly-report-table th {
-    border-right: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-/* =========================================================================
-   MEDIA QUERY: MOBILE (LAYOUT A GRIGLIA COMPATTA)
-   ========================================================================= */
-
-/* =========================================================================
-   MEDIA QUERY: MOBILE (COLONNA SINGOLA COMPATTA)
-   ========================================================================= */
-
-@media (max-width: 768px) {
     body {
-        font-size: 16px; /* Base font leggermente più piccolo */
+        font-size: 14px; 
+        overflow-x: hidden;
     }
 
-    /* Riduciamo drasticamente lo spazio sotto il contenuto principale */
+    /* Riduciamo lo spazio del footer e del contenitore */
     .theme-light .content,
     .theme-christmas .content,
     .theme-dark .content {
         padding-bottom: 20px; 
+        min-height: auto;
     }
 
+    /* Intestazioni più compatte */
     .header-titoli {
         flex-direction: column;
-        gap: 5px;
-        margin-bottom: 20px;
+        gap: 0;
+        margin-bottom: 15px; 
     }
 
     .azienda, .incendio {
-        font-size: 1.4em;
+        font-size: 1.2em;
         text-align: center;
         padding: 0;
-        margin: 0;
+        margin: 2px 0;
     }
 
-    /* CONTENITORE TABELLA */
+    /* --- CONTENITORE TABELLA --- */
     .monthly-report-table {
         margin: 0 auto;
-        max-width: 350px; 
-        width: 95%;
+        width: 95%; /* Allarghiamo un po' per far stare bene testo e numero */
+        max-width: 400px; 
     }
 
     .monthly-report-table thead { display: none; }
     .monthly-report-table tbody { display: block; width: 100%; }
 
-    /* STILE RIGA (IL BLOCCO DEL MESE) */
+    /* --- RIGHE (IL BLOCCO DEI MESI) --- */
     .monthly-report-table tr {
         display: flex;
         flex-direction: column;
         width: 100%;
         
-        /* MARGINE RIDOTTO: Meno spazio tra un mese e l'altro */
-        margin-bottom: 10px; 
+        /* Spazio elastico tra i mesi (vh) */
+        margin-bottom: 0.8vh; 
         
         border-radius: 8px;
         overflow: hidden;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
         background-color: rgba(0,0,0,0.2);
     }
 
-    /* L'ultimo mese non deve avere margine sotto */
     .monthly-report-table tbody tr:last-child {
         margin-bottom: 0;
     }
 
-    /* STILE CELLA INTERNA */
+    /* --- CELLE (MESE + NUMERO SULLA STESSA RIGA) --- */
     .monthly-report-table td {
-        display: block;
-        width: 100%;
-        text-align: center;
+        display: flex; 
+        flex-direction: row; /* FORZA la direzione orizzontale */
+        align-items: center; /* Centra verticalmente */
+        justify-content: space-between; /* Mese a sinistra, numero a destra */
+        flex-wrap: nowrap; /* IMPEDISCE di andare a capo */
         
-        /* PADDING RIDOTTO: Meno spazio dentro la casella */
-        padding: 8px 5px; 
+        width: 100%;
+        
+        /* Padding elastico */
+        padding: 1.2vh 15px; 
         
         box-sizing: border-box;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         border-right: none !important;
         border-top: none !important;
-        flex-shrink: 0;
-    }
-    
-    /* STILE DEL NUMERO (VALORE) */
-    .monthly-report-table .data-value {
-        /* PADDING RIDOTTO attorno al numero */
-        padding: 5px 0; 
-        text-align: center !important; 
-        display: inline-block;
-        vertical-align: middle;
-        font-size: 1em; /* Numero leggermente più piccolo */
     }
 
     .monthly-report-table td:last-child { border-bottom: none; }
 
+    /* --- IL VALORE (NUMERO) --- */
+    .monthly-report-table .data-value {
+        padding: 0; 
+        text-align: center !important; 
+        font-size: 1.1em;
+        font-weight: 800;
+        display: inline-block; /* Importante: non block */
+        border: none !important;
+        white-space: nowrap; /* Il numero non si spezza mai */
+    }
+    
     .monthly-report-table .data-value:hover {
-        background-color: inherit;
+        background-color: transparent;
         box-shadow: none;
-        color: inherit;
     }
 
     .monthly-report-table tbody tr:last-child .data-value:first-child,
@@ -484,22 +427,19 @@ body {
         border-radius: 0;
     }
 
-    /* ETICHETTA DEL MESE (es. "Gennaio:") */
+    /* --- NOMI DEI MESI (A SINISTRA) --- */
     .monthly-report-table td::before {
-        display: inline-block;
+        display: inline-block; /* Importante: non block */
         font-weight: 700;
-        
-        /* FONT RIDOTTO per l'etichetta */
-        font-size: 0.8em; 
-        
-        letter-spacing: 1px;
+        font-size: 0.9em;
+        letter-spacing: 0.5px;
         text-transform: uppercase;
         opacity: 0.9;
-        margin-right: 8px; 
-        vertical-align: middle; 
+        margin-right: 10px; /* Un po' di aria tra testo e numero */
+        white-space: nowrap; /* Il mese non va a capo */
     }
 
-    /* ASSEGNAZIONE NOMI */
+    /* LISTA MESI (Senza ":") */
     .monthly-report-table tr td:nth-child(1)::before { content: "Gennaio"; }
     .monthly-report-table tr td:nth-child(2)::before { content: "Febbraio"; }
     .monthly-report-table tr td:nth-child(3)::before { content: "Marzo"; }
@@ -513,18 +453,17 @@ body {
     .monthly-report-table tr td:nth-child(11)::before { content: "Novembre"; }
     .monthly-report-table tr td:nth-child(12)::before { content: "Dicembre"; }
 
-    /* TEMI (COLORI MOBILE) - Invariati */
+    /* --- GESTIONE COLORI TEMI --- */
+    .theme-dark .monthly-report-table tr { background-color: #222222; }
     .theme-dark .monthly-report-table td::before { color: #d3172d; }
-    .theme-dark .monthly-report-table tbody tr:nth-child(even) { background-color: #222222; }
-    .theme-dark .monthly-report-table tbody tr:nth-child(odd) { background-color: #2c2c2c; }
     .theme-dark .monthly-report-table .data-value { color: #ffffff; }
 
+    .theme-light .monthly-report-table tr,
+    .theme-christmas .monthly-report-table tr { background-color: #ffffff; }
+    
     .theme-light .monthly-report-table td::before,
     .theme-christmas .monthly-report-table td::before { color: #d3172d; }
-    .theme-light .monthly-report-table tbody tr:nth-child(even),
-    .theme-christmas .monthly-report-table tbody tr:nth-child(even) { background-color: #f8f8f8; }
-    .theme-light .monthly-report-table tbody tr:nth-child(odd),
-    .theme-christmas .monthly-report-table tbody tr:nth-child(odd) { background-color: #ffffff; }
+    
     .theme-light .monthly-report-table .data-value,
     .theme-christmas .monthly-report-table .data-value { color: #333333; }
 }
