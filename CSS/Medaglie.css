@@ -238,15 +238,23 @@ body {
 /* =======================================================
    MOBILE FIX DEFINITIVO (Copia e sostituisci questo blocco)
    ======================================================= */
+/* =======================================================
+   MOBILE FIX: CENTRAMENTO VERTICALE PERFETTO
+   ======================================================= */
 @media (max-width: 768px) {
 
-    /* 1. SBLOCCO PAGINA */
-    /* Fondamentale: permette di scorrere se il telefono è piccolo */
+    /* 1. SETUP BODY (IL GENITORE) */
+    /* Questo è il segreto: rendiamo il body una colonna flessibile */
     body {
-        overflow-y: auto !important; 
-        height: auto !important;
-        min-height: 100vh;
-        display: block; /* Rimuove flex che centrava forzatamente */
+        display: flex !important;
+        flex-direction: column !important;
+        min-height: 100vh !important; /* Occupa ALMENO tutto lo schermo */
+        overflow-y: auto !important;   /* Abilita lo scroll se serve */
+    }
+
+    /* Gestione Header e Footer per non farli schiacciare */
+    .main-header, .main-footer {
+        flex-shrink: 0; /* Impedisce che si rimpiccioliscano */
     }
 
     /* 2. IL RIQUADRO (LA CARD) */
@@ -254,27 +262,31 @@ body {
         width: 90% !important;
         max-width: 400px;
         
-        /* Margini sicuri: 
-           110px sopra (per non finire sotto il menu/logo)
-           50px sotto (per non toccare il footer) */
-        margin: 110px auto 50px auto !important;
+        /* CENTRAMENTO MAGICO:
+           'margin: auto' in un display flex distribuisce lo spazio vuoto
+           ugualmente sopra e sotto. Questo lo centra PERFETTAMENTE tra
+           header e footer. */
+        margin: auto !important; 
         
-        /* L'altezza si deve adattare al contenuto! */
+        /* Altezza adattiva come richiesto */
         height: auto !important; 
-        min-height: auto !important;
         
         padding: 20px !important;
-        display: block !important; /* Disattiva flex orizzontale del desktop */
+        display: block !important; 
+        
+        /* Assicuriamoci che non tocchi troppo i bordi su schermi bassissimi */
+        margin-top: auto !important;
+        margin-bottom: auto !important;
     }
 
-    /* 3. TITOLO (Ridotto per non occupare mezza pagina) */
+    /* 3. TITOLO */
     #medal-title-text {
-        font-size: 1.4rem !important; /* Molto più piccolo e leggibile */
+        font-size: 1.4rem !important;
         margin-bottom: 10px !important;
         line-height: 1.2 !important;
     }
 
-    /* 4. IMMAGINE (Contenuta) */
+    /* 4. IMMAGINE */
     .image-gallery-section {
         margin-bottom: 10px !important;
         display: flex;
@@ -283,12 +295,12 @@ body {
     }
 
     .medal-images-wrapper {
-        width: 130px !important;  /* Immagine più piccola */
+        width: 130px !important;
         height: 130px !important;
         margin: 0 auto 10px auto !important;
     }
 
-    /* 5. DESCRIZIONE (Testo che non esce dai bordi) */
+    /* 5. DESCRIZIONE */
     .description-section {
         width: 100% !important;
         padding-top: 10px !important;
@@ -297,9 +309,8 @@ body {
     }
 
     .description-section p {
-        font-size: 0.9rem !important; /* Testo compatto */
+        font-size: 0.9rem !important;
         line-height: 1.4 !important;
-        white-space: normal !important; /* Forza a capo il testo lungo */
+        white-space: normal !important;
     }
-
 }
