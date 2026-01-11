@@ -382,82 +382,96 @@ body {
     border-right: 1px solid rgba(0, 0, 0, 0.08);
 }
 
+/* =========================================================================
+   MEDIA QUERY: MOBILE (LAYOUT A GRIGLIA COMPATTA)
+   ========================================================================= */
+
+/* =========================================================================
+   MEDIA QUERY: MOBILE (COLONNA SINGOLA COMPATTA)
+   ========================================================================= */
+
 @media (max-width: 768px) {
     body {
-        font-size: 18px;
+        font-size: 16px; /* Base font leggermente più piccolo */
     }
 
-    /* RIDUZIONE PADDING GENERALE SU MOBILE */
+    /* Riduciamo drasticamente lo spazio sotto il contenuto principale */
     .theme-light .content,
     .theme-christmas .content,
     .theme-dark .content {
-        padding-bottom: 30px; /* Era 80px, ridotto per avvicinare il footer */
+        padding-bottom: 20px; 
     }
 
     .header-titoli {
         flex-direction: column;
-        gap: 10px;
-        margin-bottom: 30px;
+        gap: 5px;
+        margin-bottom: 20px;
     }
 
     .azienda, .incendio {
-        font-size: 1.5em;
+        font-size: 1.4em;
         text-align: center;
         padding: 0;
+        margin: 0;
     }
 
+    /* CONTENITORE TABELLA */
     .monthly-report-table {
-        margin-left: auto;
-        margin-right: auto;
+        margin: 0 auto;
         max-width: 350px; 
-        width: 100%;
+        width: 95%;
     }
 
-    .monthly-report-table thead {
-        display: none;
-    }
+    .monthly-report-table thead { display: none; }
+    .monthly-report-table tbody { display: block; width: 100%; }
 
-    .monthly-report-table,
-    .monthly-report-table tbody,
+    /* STILE RIGA (IL BLOCCO DEL MESE) */
     .monthly-report-table tr {
-        display: block;
+        display: flex;
+        flex-direction: column;
         width: 100%;
-        border-radius: 0;
-    }
-
-    .monthly-report-table tr {
-        margin-bottom: 15px;
-        border-radius: 10px;
+        
+        /* MARGINE RIDOTTO: Meno spazio tra un mese e l'altro */
+        margin-bottom: 10px; 
+        
+        border-radius: 8px;
         overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        background-color: rgba(0,0,0,0.2);
     }
 
-    /* --- FIX: Rimuove lo spazio sotto l'ultima riga (Dicembre) --- */
+    /* L'ultimo mese non deve avere margine sotto */
     .monthly-report-table tbody tr:last-child {
         margin-bottom: 0;
     }
 
+    /* STILE CELLA INTERNA */
     .monthly-report-table td {
         display: block;
         width: 100%;
-        text-align: center; 
-        padding: 12px 5px; 
+        text-align: center;
+        
+        /* PADDING RIDOTTO: Meno spazio dentro la casella */
+        padding: 8px 5px; 
+        
         box-sizing: border-box;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         border-right: none !important;
         border-top: none !important;
+        flex-shrink: 0;
     }
     
+    /* STILE DEL NUMERO (VALORE) */
     .monthly-report-table .data-value {
-        padding: 10px 0; 
+        /* PADDING RIDOTTO attorno al numero */
+        padding: 5px 0; 
         text-align: center !important; 
         display: inline-block;
         vertical-align: middle;
+        font-size: 1em; /* Numero leggermente più piccolo */
     }
 
-    .monthly-report-table td:last-child {
-        border-bottom: none;
-    }
+    .monthly-report-table td:last-child { border-bottom: none; }
 
     .monthly-report-table .data-value:hover {
         background-color: inherit;
@@ -470,60 +484,47 @@ body {
         border-radius: 0;
     }
 
+    /* ETICHETTA DEL MESE (es. "Gennaio:") */
     .monthly-report-table td::before {
         display: inline-block;
         font-weight: 700;
-        font-size: 0.85em;
+        
+        /* FONT RIDOTTO per l'etichetta */
+        font-size: 0.8em; 
+        
         letter-spacing: 1px;
         text-transform: uppercase;
-        opacity: 1;
-        margin-right: 10px; 
+        opacity: 0.9;
+        margin-right: 8px; 
         vertical-align: middle; 
     }
 
-    /* Etichette mesi */
-    .monthly-report-table tr td:nth-child(1)::before { content: "Gennaio:"; }
-    .monthly-report-table tr td:nth-child(2)::before { content: "Febbraio:"; }
-    .monthly-report-table tr td:nth-child(3)::before { content: "Marzo:"; }
-    .monthly-report-table tr td:nth-child(4)::before { content: "Aprile:"; }
-    .monthly-report-table tr td:nth-child(5)::before { content: "Maggio:"; }
-    .monthly-report-table tr td:nth-child(6)::before { content: "Giugno:"; }
-    .monthly-report-table tr td:nth-child(7)::before { content: "Luglio:"; }
-    .monthly-report-table tr td:nth-child(8)::before { content: "Agosto:"; }
-    .monthly-report-table tr td:nth-child(9)::before { content: "Settembre:"; }
-    .monthly-report-table tr td:nth-child(10)::before { content: "Ottobre:"; }
-    .monthly-report-table tr td:nth-child(11)::before { content: "Novembre:"; }
-    .monthly-report-table tr td:nth-child(12)::before { content: "Dicembre:"; }
+    /* ASSEGNAZIONE NOMI */
+    .monthly-report-table tr td:nth-child(1)::before { content: "Gennaio"; }
+    .monthly-report-table tr td:nth-child(2)::before { content: "Febbraio"; }
+    .monthly-report-table tr td:nth-child(3)::before { content: "Marzo"; }
+    .monthly-report-table tr td:nth-child(4)::before { content: "Aprile"; }
+    .monthly-report-table tr td:nth-child(5)::before { content: "Maggio"; }
+    .monthly-report-table tr td:nth-child(6)::before { content: "Giugno"; }
+    .monthly-report-table tr td:nth-child(7)::before { content: "Luglio"; }
+    .monthly-report-table tr td:nth-child(8)::before { content: "Agosto"; }
+    .monthly-report-table tr td:nth-child(9)::before { content: "Settembre"; }
+    .monthly-report-table tr td:nth-child(10)::before { content: "Ottobre"; }
+    .monthly-report-table tr td:nth-child(11)::before { content: "Novembre"; }
+    .monthly-report-table tr td:nth-child(12)::before { content: "Dicembre"; }
 
-    /* Stili specifici per tema scuro su mobile */
-    .theme-dark .monthly-report-table td::before {
-        color: #d3172d;
-    }
-    .theme-dark .monthly-report-table tbody tr:nth-child(even) {
-        background-color: #222222;
-    }
-    .theme-dark .monthly-report-table tbody tr:nth-child(odd) {
-        background-color: #2c2c2c;
-    }
-    .theme-dark .monthly-report-table .data-value {
-        color: #ffffff;
-    }
+    /* TEMI (COLORI MOBILE) - Invariati */
+    .theme-dark .monthly-report-table td::before { color: #d3172d; }
+    .theme-dark .monthly-report-table tbody tr:nth-child(even) { background-color: #222222; }
+    .theme-dark .monthly-report-table tbody tr:nth-child(odd) { background-color: #2c2c2c; }
+    .theme-dark .monthly-report-table .data-value { color: #ffffff; }
 
-    /* Stili specifici per tema chiaro/natale su mobile */
     .theme-light .monthly-report-table td::before,
-    .theme-christmas .monthly-report-table td::before {
-        color: #d3172d;
-    }
+    .theme-christmas .monthly-report-table td::before { color: #d3172d; }
     .theme-light .monthly-report-table tbody tr:nth-child(even),
-    .theme-christmas .monthly-report-table tbody tr:nth-child(even) {
-        background-color: #f8f8f8;
-    }
+    .theme-christmas .monthly-report-table tbody tr:nth-child(even) { background-color: #f8f8f8; }
     .theme-light .monthly-report-table tbody tr:nth-child(odd),
-    .theme-christmas .monthly-report-table tbody tr:nth-child(odd) {
-        background-color: #ffffff;
-    }
+    .theme-christmas .monthly-report-table tbody tr:nth-child(odd) { background-color: #ffffff; }
     .theme-light .monthly-report-table .data-value,
-    .theme-christmas .monthly-report-table .data-value {
-        color: #333333;
-    }
+    .theme-christmas .monthly-report-table .data-value { color: #333333; }
 }
