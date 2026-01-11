@@ -533,11 +533,6 @@ body.theme-christmas .snowflake {
     .menu {
         box-sizing: border-box !important;
     }
-    
-    body.menu-open .header-bottom {
-        visibility: visible;
-        opacity: 1;
-    }
 
     .header-top {
         padding: 5px 10px; 
@@ -685,38 +680,30 @@ body.theme-christmas .snowflake {
 
     @media (max-width: 768px) {
 
-    /* 1. RESETTARE LE DIMENSIONI FISSE DEI CONTENITORI */
     .logo, 
     .header-right-controls {
-        flex-basis: auto; /* Lascia che la dimensione sia automatica */
-        flex-shrink: 1;   /* Permetti loro di restringersi se necessario */
-        min-width: 0;     /* Evita che contenuti interni forzino larghezze eccessive */
+        flex-basis: auto;
+        flex-shrink: 1;
+        min-width: 0;
     }
 
-    /* Modifica esistente */
     .header-right-controls {
         order: 3;
         gap: 5px;
-        justify-content: flex-end; /* Assicura che stiano a destra */
+        justify-content: flex-end;
     }
 
-    /* 2. MIGLIORARE I BOTTONI DEL TEMA */
     .theme-switcher {
-        gap: 10px; /* Riduci leggermente il gap se aumenti la dimensione */
+        gap: 10px;
     }
 
     .theme-switcher button {
-        /* Aumentiamo leggermente l'area cliccabile */
-        width: 36px; 
-        height: 36px;
-        /* Oppure mantieni 30px ma aggiungi padding per l'area di tocco */
+        width: 30px; 
+        height: 30px;
     }
     
-    /* Opzionale: Rimuovi l'effetto hover su mobile perché può rimanere "incastrato" dopo il tocco */
     .theme-switcher button:hover {
         transform: none; 
     }
-    
-    /* ... il resto del tuo codice mobile ... */
 }
 }

@@ -71,13 +71,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-
 document.addEventListener('DOMContentLoaded', () => {
     const lightButton = document.getElementById('theme-light');
     const darkButton = document.getElementById('theme-dark');
     const christmasButton = document.getElementById('theme-christmas');
     const themeClasses = ['theme-light', 'theme-dark', 'theme-christmas'];
-    const CHRISTMAS_MODE_PREFERENCE = 'christmasModeEnabled'; // Chiave per il controllo ON/OFF
+    const CHRISTMAS_MODE_PREFERENCE = 'christmasModeEnabled';
 
     const getAudioPath = () => {
         const path = window.location.pathname;
@@ -102,23 +101,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const muteBtn = document.createElement('div');
     muteBtn.id = 'christmas-mute-btn-new';
     Object.assign(muteBtn.style, {
-        position: 'fixed', 
-        bottom: '7px', 
-        right: '20px', 
-        width: '40px', 
-        height: '40px',
-        backgroundColor: '#cc0000', 
-        borderRadius: '50%', 
-        display: 'none',
-        justifyContent: 'center', 
-        alignItems: 'center', 
-        cursor: 'pointer', 
-        zIndex: '10000',
-        border: '2px solid white',
-        boxShadow: '0 0 10px rgba(0,0,0,0.5)',
-        color: 'white',
-        fontSize: '24px',
-        fontWeight: 'bold'
+        position: 'fixed', bottom: '7px', right: '20px', width: '40px', height: '40px',
+        backgroundColor: '#cc0000', borderRadius: '50%', display: 'none',
+        justifyContent: 'center', alignItems: 'center', cursor: 'pointer', zIndex: '10000',
+        border: '2px solid white', boxShadow: '0 0 10px rgba(0,0,0,0.5)',
+        color: 'white', fontSize: '24px', fontWeight: 'bold'
     });
     muteBtn.innerHTML = '♪';
     document.body.appendChild(muteBtn);
@@ -139,42 +126,59 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    const updateChristmasButtonVisibility = () => {
-        const isEnabled = localStorage.getItem(CHRISTMAS_MODE_PREFERENCE) !== 'false';
-        
-        if (christmasButton) {
-            christmasButton.style.display = isEnabled ? '' : 'none';
-        }
 
-        if (!isEnabled) {
-            const currentTheme = localStorage.getItem('themePreference');
-            if (currentTheme === 'theme-christmas') {
-                applyTheme('theme-light'); 
+    const updateButtonsVisibility = (activeTheme) => {
+        const isChristmasEnabled = localStorage.getItem(CHRISTMAS_MODE_PREFERENCE) !== 'false';
+
+        if (!isChristmasEnabled) {
+            
+            if (christmasButton) christmasButton.style.display = 'none';
+
+            if (activeTheme === 'theme-light') {
+                if (lightButton) lightButton.style.display = 'none';
+                if (darkButton) darkButton.style.display = '';
+            } else {
+                if (darkButton) darkButton.style.display = 'none';
+                if (lightButton) lightButton.style.display = ''; 
             }
+
+        } else {
+            if (christmasButton) christmasButton.style.display = '';
+            if (lightButton) lightButton.style.display = '';
+            if (darkButton) darkButton.style.display = '';
         }
     };
-    
+
     const applyTheme = (name) => {
         document.body.classList.remove(...themeClasses);
         if (name && name !== 'theme-default') document.body.classList.add(name);
+        
         localStorage.setItem('themePreference', name);
+        
         syncAudio(name);
+        updateButtonsVisibility(name);
     };
 
     const toggleChristmasMode = (enable) => {
         const newState = enable.toString();
         localStorage.setItem(CHRISTMAS_MODE_PREFERENCE, newState);
-        updateChristmasButtonVisibility();
+        
+        if (!enable) {
+            const currentTheme = localStorage.getItem('themePreference');
+            if (currentTheme === 'theme-christmas') {
+                applyTheme('theme-light');
+            } else {
+                updateButtonsVisibility(currentTheme);
+            }
+        } else {
+            const currentTheme = localStorage.getItem('themePreference') || 'theme-light';
+            updateButtonsVisibility(currentTheme);
+        }
     };
 
+    /* NATALE */
     toggleChristmasMode(false); 
-
-    const initialEnableState = localStorage.getItem(CHRISTMAS_MODE_PREFERENCE) === null || localStorage.getItem(CHRISTMAS_MODE_PREFERENCE) !== 'false';
-    if (localStorage.getItem(CHRISTMAS_MODE_PREFERENCE) === null) {
-        toggleChristmasMode(initialEnableState);
-    } else {
-        updateChristmasButtonVisibility();
-    }
+    /* NATALE */
 
     muteBtn.addEventListener('click', (e) => {
         e.stopPropagation();

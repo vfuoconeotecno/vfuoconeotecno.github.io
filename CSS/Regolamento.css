@@ -62,26 +62,28 @@ body::-webkit-scrollbar {
 }
 /* HEADER */
 
-.main-header.scrolled {
-    height: 80px;
-    padding: 0;
-}
+@media screen and (min-width: 992px) {
+    .main-header.scrolled {
+        height: 80px;
+        padding: 0;
+    }
 
-.main-header.scrolled .header-top {
-    align-items: center;
-    height: 100%;
-}
+    .main-header.scrolled .header-top {
+        align-items: center;
+        height: 100%;
+    }
 
-.main-header.scrolled .header-bottom {
-    opacity: 0;
-    height: 0;
-    transition: height 0.4s ease-out;
-    pointer-events: none;
-}
+    .main-header.scrolled .header-bottom {
+        opacity: 0;
+        height: 0;
+        transition: height 0.4s ease-out;
+        pointer-events: none;
+    }
 
-.main-header.scrolled .logo img {
-    height: 4rem;
-    transition: height 0.4s ease-out;
+    .main-header.scrolled .logo img {
+        height: 4rem;
+        transition: height 0.4s ease-out;
+    }
 }
 
 /* TORNA SU */
@@ -667,4 +669,159 @@ body::-webkit-scrollbar {
 #firma-cavalieri {
     max-width: 500px;
     bottom: 40px;
+}
+
+@media (max-width: 768px) {
+
+    body {
+        background-attachment: fixed;
+        background-position: center center;
+        background-size: cover;
+    }
+
+    .regolamento-container {
+        width: 95%;
+        max-width: 500px;
+        margin: 40px auto;
+        padding: 25px 20px;
+        background-color: rgba(255, 255, 255, 0.75);
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0);
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    .theme-light .regolamento-container {
+        background-color: rgba(214, 214, 214, 0.55);
+        transition: all 0.3s;
+    }
+
+    .theme-dark .regolamento-container {
+        background-color: rgba(31, 31, 31, 0.75); 
+        transition: all 0.3s;
+    }
+
+    .theme-christmas .regolamento-container {
+        background-color: rgba(105, 48, 48, 0.75);
+        transition: all 0.3s;
+    }
+
+    .titolo-principale {
+        padding-top: 0;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    .titolo-secondario {
+        margin-bottom: 25px;
+        text-align: center;
+    }
+
+    .titolo-preambolo {
+        margin-top: 30px;
+        font-size: 1.3rem;
+        text-align: center;
+    }
+
+    .preambolo {
+        padding: 10px 0;
+        font-size: 1rem;
+        text-align: justify;
+    }
+
+    .titolo-indice {
+        margin-top: 30px;
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+        text-align: center;
+    }
+    
+    .indice {
+        margin-left: 0;
+        padding-left: 20px;
+    }
+
+    .theme-light .titolo-regolamento-sezione,
+    .theme-dark .titolo-regolamento-sezione,
+    .theme-christmas .titolo-regolamento-sezione {
+        margin-top: 40px;
+        font-size: 1.4rem;
+        text-align: center;
+        border-bottom: 1px solid rgba(128,128,128,0.3);
+        padding-bottom: 10px;
+    }
+
+    /* Articoli */
+    .articolo {
+        padding: 5px 0;
+        margin-top: 20px;
+    }
+    
+    .titolo-articolo {
+        font-size: 1.15rem;
+        font-weight: bold;
+    }
+
+    /* Tabelle */
+    .gradi-table {
+        width: 100%;
+    }
+
+    .gradi-table td, 
+    .ruolo-header {
+        padding: 8px 4px;   
+        font-size: 0.85em;
+    }
+
+    .distintivo img {
+        max-width: 40px;
+        height: auto;
+    }
+    
+    .qualifica {
+        width: 50%;
+    }
+    
+    .distintivo {
+        width: 50%;
+        text-align: center;
+    }
+
+    /* Sezione Firme */
+    .sezione-firme {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        margin-top: 50px;
+        padding-top: 20px;
+        border-top: 1px solid #ccc;
+    }
+
+    .firma-sx, .firme-dx {
+        text-align: center;
+        width: 100%;
+        margin: 0;
+    }
+    
+    .firma-sx { order: 1; }
+    .firme-dx { order: 2; }
+
+    .blocco-firma {
+        text-align: center;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .img-firma {
+        display: block;
+        margin: 5px auto; 
+        max-width: 150px !important;
+        height: auto;
+    }
+
+    #firma-chimera, #firma-cavalieri, #firma-floris {
+        position: static;
+        transform: none;
+    }
 }
