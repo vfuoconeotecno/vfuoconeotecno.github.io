@@ -208,12 +208,6 @@ body {
     }
 }
 
-
-/* =========================================================================
- * MEDIA QUERY: Visualizzazione Verticale (Smartphone/Schermi stretti)
- * Si attiva per schermi fino a 768px.
- * ========================================================================= */
-
 @media (max-width: 768px) {
     body {
         font-size: 18px;
@@ -238,12 +232,10 @@ body {
         width: 100%;
     }
 
-    /* 1. NASCONDI L'HEADER ORIGINALE */
     .monthly-report-table thead {
         display: none;
     }
 
-    /* 2. TRASFORMA LA STRUTTURA IN BLOCCHI VERTICALI */
     .monthly-report-table,
     .monthly-report-table tbody,
     .monthly-report-table tr {
@@ -252,7 +244,6 @@ body {
         border-radius: 0;
     }
 
-    /* Stile per ogni blocco/riga */
     .monthly-report-table tr {
         margin-bottom: 15px;
         border-radius: 10px;
@@ -260,13 +251,10 @@ body {
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
 
-    /* 3. TRASFORMA LE CELLE IN RIGHE COMPLETE (Mese + Valore) */
     .monthly-report-table td {
         display: block;
         width: 100%;
-        /* Centra il contenuto (Etichetta e Valore raggruppati) */
         text-align: center; 
-        /* Riduco il padding orizzontale */
         padding: 12px 5px; 
         box-sizing: border-box;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -275,14 +263,12 @@ body {
     }
     
     .monthly-report-table .data-value {
-        /* Riduco il padding per il data-value in modalità mobile */
         padding: 10px 0; 
         text-align: center !important; 
-        display: inline-block; /* Permette l'allineamento orizzontale con l'etichetta */
+        display: inline-block;
         vertical-align: middle;
     }
 
-    /* Rimuovi bordo finale e hover su mobile */
     .monthly-report-table td:last-child {
         border-bottom: none;
     }
@@ -292,13 +278,11 @@ body {
         color: inherit;
     }
 
-    /* Rimuovi i border-radius dal fondo della tabella in modalità stacked */
     .monthly-report-table tbody tr:last-child .data-value:first-child,
     .monthly-report-table tbody tr:last-child .data-value:last-child {
         border-radius: 0;
     }
 
-    /* 4. INSERISCI L'ETICHETTA DEL MESE (Utilizzando nth-child) */
     .monthly-report-table td::before {
         display: inline-block;
         
@@ -307,13 +291,10 @@ body {
         letter-spacing: 1px;
         text-transform: uppercase;
         opacity: 1;
-
-        /* Aggiunge i due punti e lo spazio per separare l'etichetta dal valore */
         margin-right: 10px; 
         vertical-align: middle; 
     }
 
-    /* Definizione dei mesi tramite Indice (nth-child) */
     .monthly-report-table tr td:nth-child(1)::before { content: "Gennaio:"; }
     .monthly-report-table tr td:nth-child(2)::before { content: "Febbraio:"; }
     .monthly-report-table tr td:nth-child(3)::before { content: "Marzo:"; }
@@ -326,13 +307,7 @@ body {
     .monthly-report-table tr td:nth-child(10)::before { content: "Ottobre:"; }
     .monthly-report-table tr td:nth-child(11)::before { content: "Novembre:"; }
     .monthly-report-table tr td:nth-child(12)::before { content: "Dicembre:"; }
-    /* Fine Definizione Mesi */
 }
-
-
-/* =========================================================================
- * TEMI
- * ========================================================================= */
 
 .theme-dark .monthly-report-table {
     background-color: #222222;
@@ -353,7 +328,6 @@ body {
     border-right: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Stili specifici per stacking Dark Mode */
 @media (max-width: 768px) {
     .theme-dark .monthly-report-table td::before {
         color: #d3172d;
@@ -381,8 +355,6 @@ body {
     color: #d3172d;
 }
 
-
-/* LIGHT / CHRISTMAS THEME */
 .theme-light .monthly-report-table,
 .theme-christmas .monthly-report-table {
     background-color: #ffffff;
@@ -428,7 +400,6 @@ body {
         color: #333333;
     }
 }
-
 
 .theme-light .monthly-report-table .data-value,
 .theme-christmas .monthly-report-table .data-value {

@@ -71,13 +71,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
 document.addEventListener('DOMContentLoaded', () => {
     const lightButton = document.getElementById('theme-light');
     const darkButton = document.getElementById('theme-dark');
     const christmasButton = document.getElementById('theme-christmas');
     const themeClasses = ['theme-light', 'theme-dark', 'theme-christmas'];
     const CHRISTMAS_MODE_PREFERENCE = 'christmasModeEnabled';
-
     let metaThemeColor = document.querySelector("meta[name='theme-color']");
     if (!metaThemeColor) {
         metaThemeColor = document.createElement("meta");
@@ -86,13 +86,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const updateMetaColor = (theme) => {
+        let colorHex;
         if (theme === 'theme-christmas') {
-            metaThemeColor.setAttribute("content", "#963E49");
+            colorHex = "#963E49";
         } else if (theme === 'theme-light') {
-            metaThemeColor.setAttribute("content", "#E7E7E7");
+            colorHex = "#E7E7E7";
         } else {
-            metaThemeColor.setAttribute("content", "#0A0A0A");
+            colorHex = "#0A0A0A"; 
         }
+
+        metaThemeColor.setAttribute("content", colorHex);
+        document.documentElement.style.backgroundColor = colorHex;
     };
 
     const getAudioPath = () => {
@@ -171,7 +175,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         syncAudio(name);
         updateButtonsVisibility(name);
-        
         updateMetaColor(name);
     };
 
