@@ -1,7 +1,7 @@
 :root {
     --primary-color: #e50000;
     --secondary-color: #ff9900;
-    --bg-dark: #18181b;
+    --bg-dark: hsl(240, 6%, 10%);
     --bg-card: #27272a;
     --text-white: #ffffff;
     --text-gray: #a1a1aa;
@@ -16,6 +16,13 @@ body {
     flex-direction: column;
     min-height: 100vh;
 }
+
+body::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
 
 .video-hero {
     background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://source.unsplash.com/1600x900/?stadium,sport');
@@ -75,8 +82,16 @@ body {
     margin: 0 auto 50px auto;
 }
 
-.video-card {
-    background-color: var(--bg-card);
+.theme-light .video-card {
+    background-color: #a1a1aa;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #a1a1aa;
+}
+
+.theme-dark .video-card {
+    background-color: #27272a;
     border-radius: 12px;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -172,9 +187,16 @@ body {
     color: white;
 }
 
-.video-info p {
+.theme-dark .video-info p {
     font-size: 0.9rem;
     color: var(--text-gray);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.theme-light .video-info p {
+    font-size: 0.9rem;
+    color: #fff;
     margin: 0;
     line-height: 1.5;
 }
