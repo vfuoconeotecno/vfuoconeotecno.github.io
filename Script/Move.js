@@ -3,8 +3,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const el = document.querySelector('.Organigramma-struttura');
     const container = document.body;
 
-    // Configurazione soglia (Pixel): quanto deve muoversi il dito prima che la mappa si sposti
-    const DRAG_THRESHOLD = 8; 
+    // SOGLIA DI TOLLERANZA (Pixel)
+    // Serve a distinguere un "click maldestro" da un vero trascinamento
+    const DRAG_THRESHOLD = 6; 
 
     const isMapMode = () => window.innerWidth <= 768;
 
@@ -13,24 +14,32 @@ document.addEventListener("DOMContentLoaded", () => {
         scale: 0.6, 
         pointX: 0, 
         pointY: 0,
-        startX: 0, // Offset relativo per il calcolo
+        startX: 0, 
         startY: 0,
-        initialTouchX: 0, // Posizione fisica iniziale del dito X
-        initialTouchY: 0, // Posizione fisica iniziale del dito Y
-        isDragging: false, // Diventa true SOLO dopo aver superato la soglia
-        active: false // Se il mouse/dito è giù
+        initialTouchX: 0,
+        initialTouchY: 0,
+        isDragging: false, 
+        active: false,
+        updatePending: false // Per ottimizzare i frame (requestAnimationFrame)
     };
 
     let initialPinchDistance = null;
     let initialScale = null;
 
-    // 1. APPLICA LE MODIFICHE
-    function setTransform() {
-        if (!isMapMode()) {
-            el.style.transform = ""; 
-            return; 
-        }
-        el.style.transform = `translate(${state.pointX}px, ${state.pointY}px) scale(${state.scale})`;
+    // 1. FUNZIONE DI AGGIORNAMENTO GRAFICO (Ottimizzata 60fps)
+    function updateVisuals() {
+        if (state.updatePending) return;
+        state.updatePending = true;
+        
+        requestAnimationFrame(() => {
+            if (isMapMode()) {
+                // Usa translate3d per forzare l'accelerazione hardware della GPU
+                el.style.transform = `translate3d(${state.pointX}px, ${state.pointY}px, 0) scale(${state.scale})`;
+            } else {
+                el.style.transform = "";
+            }
+            state.updatePending = false;
+        });
     }
 
     // 2. CENTRATURA INIZIALE
@@ -38,99 +47,110 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!isMapMode()) return;
         const contentWidth = el.scrollWidth;
         const screenWidth = window.innerWidth;
-        // Centra
+        
         state.pointX = (screenWidth - (contentWidth * state.scale)) / 2;
         state.pointY = 50; 
-        setTransform();
+        updateVisuals();
     }
     
+    // Centra all'avvio e se giri il telefono
     setTimeout(centerContent, 100);
     window.addEventListener('resize', () => {
         if(isMapMode()) setTimeout(centerContent, 100);
         else el.style.transform = "";
     });
 
+
     /* =========================================
-       GESTIONE MOUSE (PC)
+       GESTIONE UNIFICATA (MOUSE + TOUCH)
        ========================================= */
-    container.addEventListener('mousedown', (e) => {
+
+    function onPointerDown(x, y) {
         if (!isMapMode()) return;
-        e.preventDefault();
-        
         state.active = true;
-        state.isDragging = false; // Reset dello stato trascinamento
+        state.isDragging = false;
         
-        // Salviamo dove abbiamo cliccato fisicamente
-        state.initialTouchX = e.clientX;
-        state.initialTouchY = e.clientY;
-
-        // Calcoliamo l'offset matematico
-        state.startX = e.clientX - state.pointX;
-        state.startY = e.clientY - state.pointY;
+        // Salviamo dove abbiamo toccato fisicamente
+        state.initialTouchX = x;
+        state.initialTouchY = y;
         
+        // Non calcoliamo ancora startX/Y. Lo faremo solo se inizia il vero trascinamento.
         container.style.cursor = 'grab';
-    });
+    }
 
-    container.addEventListener('mousemove', (e) => {
-        if (!isMapMode() || !state.active) return;
-        e.preventDefault();
+    function onPointerMove(x, y, e) {
+        if (!isMapMode()) return;
+        
+        // Se stiamo pizzicando (zoom 2 dita), ignora il movimento normale
+        if (initialPinchDistance) return;
+        
+        if (!state.active) return;
 
-        // CALCOLO DISTANZA: Ci siamo mossi abbastanza?
-        const moveX = Math.abs(e.clientX - state.initialTouchX);
-        const moveY = Math.abs(e.clientY - state.initialTouchY);
+        // Blocchiamo lo scroll nativo della pagina
+        if (e.cancelable) e.preventDefault();
 
-        // Se non stavamo già trascinando E il movimento è piccolo, ESCI.
-        if (!state.isDragging && (moveX < DRAG_THRESHOLD && moveY < DRAG_THRESHOLD)) {
-            return;
+        // 1. SIAMO ANCORA IN FASE DI "DECISIONE"?
+        if (!state.isDragging) {
+            const moveX = Math.abs(x - state.initialTouchX);
+            const moveY = Math.abs(y - state.initialTouchY);
+
+            // Se non ci siamo mossi abbastanza, esci. (È solo un click tremolante)
+            if (moveX < DRAG_THRESHOLD && moveY < DRAG_THRESHOLD) {
+                return;
+            }
+
+            // 2. OK, È UN TRASCINAMENTO REALE!
+            state.isDragging = true;
+            container.style.cursor = 'grabbing';
+            
+            // FIX DEL "SALTO":
+            // Ricalcoliamo il punto di ancoraggio ORA, basandoci sulla posizione attuale del dito.
+            // In questo modo il movimento inizia FLUIDO da 0, senza scatti.
+            state.startX = x - state.pointX;
+            state.startY = y - state.pointY;
         }
 
-        // Se arriviamo qui, l'utente vuole trascinare davvero
-        state.isDragging = true; 
-        container.style.cursor = 'grabbing';
+        // 3. APPLICA IL MOVIMENTO
+        state.pointX = x - state.startX;
+        state.pointY = y - state.startY;
+        
+        updateVisuals();
+    }
 
-        state.pointX = e.clientX - state.startX;
-        state.pointY = e.clientY - state.startY;
-        setTransform();
-    });
-
-    const stopMousePan = () => {
+    function onPointerUp() {
         state.active = false;
         state.isDragging = false;
+        initialPinchDistance = null;
         container.style.cursor = 'grab';
-    };
-    container.addEventListener('mouseup', stopMousePan);
-    container.addEventListener('mouseleave', stopMousePan);
+    }
 
-    // Zoom Mouse
+
+    /* --- EVENTI MOUSE --- */
+    container.addEventListener('mousedown', e => {
+        if(e.button === 0) onPointerDown(e.clientX, e.clientY); // Solo tasto sinistro
+    });
+    container.addEventListener('mousemove', e => onPointerMove(e.clientX, e.clientY, e));
+    container.addEventListener('mouseup', onPointerUp);
+    container.addEventListener('mouseleave', onPointerUp);
+    
+    // Zoom Mouse (Rotella)
     container.addEventListener('wheel', (e) => {
         if (!isMapMode()) return;
         e.preventDefault();
         const delta = e.deltaY > 0 ? 0.9 : 1.1;
-        const newScale = state.scale * delta;
-        state.scale = Math.min(Math.max(0.2, newScale), 3.0);
-        setTransform();
+        state.scale = Math.min(Math.max(0.2, state.scale * delta), 3.0);
+        updateVisuals();
     }, { passive: false });
 
 
-    /* =========================================
-       GESTIONE TOUCH (CELLULARE)
-       ========================================= */
+    /* --- EVENTI TOUCH (CELLULARE) --- */
     container.addEventListener('touchstart', function(e) {
         if (!isMapMode()) return;
         
         if (e.touches.length === 1) {
-            state.active = true;
-            state.isDragging = false; // Reset
-            
-            // Salviamo posizioni iniziali
-            state.initialTouchX = e.touches[0].clientX;
-            state.initialTouchY = e.touches[0].clientY;
-
-            state.startX = e.touches[0].clientX - state.pointX;
-            state.startY = e.touches[0].clientY - state.pointY;
-
+            onPointerDown(e.touches[0].clientX, e.touches[0].clientY);
         } else if (e.touches.length === 2) {
-            state.active = false; // Disabilita pan se zoomiamo
+            state.active = false; // Zoom vince su Pan
             initialPinchDistance = getDistance(e.touches);
             initialScale = state.scale;
         }
@@ -139,40 +159,21 @@ document.addEventListener("DOMContentLoaded", () => {
     container.addEventListener('touchmove', function(e) {
         if (!isMapMode()) return;
 
-        // Blocchiamo scroll nativo solo se stiamo "lavorando"
-        if(state.active || initialPinchDistance) e.preventDefault();
-
-        if (e.touches.length === 1 && state.active) {
-            // VERIFICA ZONA MORTA
-            const moveX = Math.abs(e.touches[0].clientX - state.initialTouchX);
-            const moveY = Math.abs(e.touches[0].clientY - state.initialTouchY);
-
-            // Se il movimento è minuscolo, ignoralo (è un tap tremolante)
-            if (!state.isDragging && (moveX < DRAG_THRESHOLD && moveY < DRAG_THRESHOLD)) {
-                return;
-            }
-
-            // Superata la soglia, attiva il movimento
-            state.isDragging = true;
-            
-            state.pointX = e.touches[0].clientX - state.startX;
-            state.pointY = e.touches[0].clientY - state.startY;
-            setTransform();
-
+        if (e.touches.length === 1) {
+            onPointerMove(e.touches[0].clientX, e.touches[0].clientY, e);
         } else if (e.touches.length === 2 && initialPinchDistance) {
+            if (e.cancelable) e.preventDefault();
             const currentDistance = getDistance(e.touches);
             const newScale = initialScale * (currentDistance / initialPinchDistance);
             state.scale = Math.min(Math.max(0.2, newScale), 3.0);
-            setTransform();
+            updateVisuals();
         }
     }, { passive: false });
 
-    container.addEventListener('touchend', function(e) {
-        state.active = false;
-        state.isDragging = false;
-        initialPinchDistance = null;
-    });
+    container.addEventListener('touchend', onPointerUp);
 
+
+    // Helper
     function getDistance(touches) {
         const dx = touches[0].clientX - touches[1].clientX;
         const dy = touches[0].clientY - touches[1].clientY;

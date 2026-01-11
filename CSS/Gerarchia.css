@@ -216,10 +216,10 @@ img[src*="Niente.png"] {
         position: absolute; /* Assoluto per muoverlo con coordinate X,Y */
         top: 0;
         left: 0;
-        
+        will-change: transform;
         width: max-content; /* Larghezza automatica in base al contenuto */
         transform-origin: 0 0; /* Le coordinate partono dall'angolo in alto a sx */
-        
+        transition: none;
         padding: 50px;
         box-sizing: border-box;
         cursor: grab;
