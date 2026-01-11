@@ -192,6 +192,9 @@ img[src*="Niente.png"] {
 /* =========================================
    VISUALIZZAZIONE "MAPPA" MOBILE (FIXED)
    ========================================= */
+/* =========================================
+   VISUALIZZAZIONE "MAPPA" MOBILE (DEFINITIVA JS)
+   ========================================= */
 @media screen and (max-width: 768px) {
     
     html, body {
@@ -199,48 +202,41 @@ img[src*="Niente.png"] {
         height: 100%;
         margin: 0;
         padding: 0;
-        overflow: hidden; /* Blocca lo scroll nativo per usare il trascinamento JS */
-        position: relative;
+        overflow: hidden; /* BLOCCA lo scroll nativo del telefono */
+        touch-action: none; /* Disabilita zoom e gesti standard del browser */
+        position: fixed; /* Blocca la pagina */
     }
 
+    /* Il contenitore che muoveremo con JS */
     .Organigramma-struttura {
-        /* Forza il contenitore ad essere largo quanto serve per i box affiancati */
         display: flex;
         flex-direction: column;
         align-items: center;
         
-        width: max-content; /* Si allarga all'infinito */
-        min-width: 100vw;
-        padding: 50px; /* Spazio ai bordi */
-
-        /* ZOOM FISSO: Riduce tutto al 70% per far vedere meglio la struttura */
-        transform: scale(0.7);
-        /* FONDAMENTALE: Ancora la visuale in alto a sinistra, così non sparisce nel nulla */
-        transform-origin: top left; 
-        
-        position: absolute; /* Necessario per il trascinamento */
+        position: absolute; /* Assoluto per muoverlo con coordinate X,Y */
         top: 0;
         left: 0;
-        cursor: grab; /* Icona manina */
+        
+        width: max-content; /* Larghezza automatica in base al contenuto */
+        transform-origin: 0 0; /* Le coordinate partono dall'angolo in alto a sx */
+        
+        padding: 50px;
+        box-sizing: border-box;
+        cursor: grab;
     }
 
-    /* FORZA LA VISIBILITÀ DELLE LINEE */
-    /* Queste regole sovrascrivono il comportamento "nascosto" del mobile classico */
-    .Livello:not(:first-child)::before {
-        display: block !important;
-        /* Ricalcolo altezza per mobile se necessario, ma quello desktop dovrebbe andare */
-    }
-    .Gruppo::before {
-        display: block !important;
-    }
-    .Livello:not(:first-child) .Gruppo:not(:has(.Ruolo-Box:nth-child(2)))::before {
-        display: none !important;
-    }
+    /* FORZA LA VISIBILITÀ DI TUTTE LE LINEE E BOX */
+    .Livello:not(:first-child)::before,
+    .Gruppo::before,
     .Livello:not(:first-child) .Ruolo-Box::before {
         display: block !important;
     }
 
-    /* Ripristina il layout orizzontale dei gruppi */
+    .Livello:not(:first-child) .Gruppo:not(:has(.Ruolo-Box:nth-child(2)))::before {
+        display: none !important;
+    }
+
+    /* Ripristina layout orizzontale */
     .Gruppo {
         display: inline-flex !important;
         flex-direction: row !important;
@@ -252,7 +248,6 @@ img[src*="Niente.png"] {
         margin-bottom: var(--gap-vertical) !important;
     }
     
-    /* Box larghezza fissa come su PC */
     .Ruolo-Box {
         width: var(--box-width) !important; 
         max-width: none !important;
