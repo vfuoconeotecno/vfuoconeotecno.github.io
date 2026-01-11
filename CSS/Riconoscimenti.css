@@ -1,9 +1,13 @@
+html {
+    scroll-behavior: smooth;
+}
+
 body { 
     font-family: 'Montserrat', sans-serif; 
     margin: 0;
     display: flex;
     flex-direction: column;
-    min-height: 20vh; 
+    min-height: 100vh;
     background-image: url('../Immagini/Sfondi/Onorificenze.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -13,102 +17,120 @@ body {
 }
 
 body::-webkit-scrollbar {
-  display: none;
-  width: 0;
-  height: 0;
+  width: 8px;
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
 }
 
 .main-layout {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; 
     width: 100%;
+    padding: 120px 20px 60px 20px; 
+    box-sizing: border-box;
     min-height: 100vh;
-    padding: 2vw;
 }
 
 .skins-container {
-    gap: 3vh;
-    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 100%;
+    height: auto;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .player-row {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.5s ease;
 }
 
 .skin-card {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     text-align: center;
-    padding: 15px;
-    width: clamp(220px, 30vw, 500px);
-    overflow: hidden;
-    transition: all 0.3s ease;
+    padding: 10px;
+    cursor: pointer; 
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 2;
 }
 
-.skin-img {
-    order: 2;
-    display: block;
-    margin: 0 auto;
-    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
-    cursor: pointer;
-    transition: all 0.3s ease;
-    height: clamp(200px, 40vh, 450px);
-}
-
-.skin-img:hover {
+.skin-card:hover {
     transform: scale(1.05);
-    transition: all 0.3s ease;
-}
-
-
-.skin-card p {
-    order: 1;
-    margin: 0 0 15px 0;
-    font-weight: bold;
-    color: #ffffff;
-    letter-spacing: 1px;
-    font-size: clamp(1.5rem, 2.5vw, 3rem);
-    white-space: nowrap;
-    text-overflow: ellipsis;
 }
 
 .player-row.active .skin-card {
-    transform: scale(0.95);
+    transform: scale(1.05);
+}
+
+.skin-img {
+    display: block;
+    height: 500px; 
+    width: auto;
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.6));
+    transition: all 0.3s ease;
+}
+
+.skin-card p {
+    margin: 15px 0 0 0;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+    letter-spacing: 1px;
+    font-size: 1.8rem;
+    font-family: 'Orbitron', sans-serif;
 }
 
 .medals-panel {
-    width: 0;
+    width: 100%;
+    max-height: 0;
     opacity: 0;
     overflow: hidden;
-    display: flex;
-    gap: 20px;
-    border-radius: 0 20px 20px 0;
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    white-space: nowrap;
-    align-items: center;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 20px;
+    margin-top: 0;
+    transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.5s ease,
+                margin-top 0.5s ease,
+                padding 0.5s ease;
 }
 
 .player-row.active .medals-panel {
-    width: auto;
+    max-height: 2000px;
     opacity: 1;
-    margin-left: 20px;
-    padding: 20px 30px;
-    display: block; 
-    overflow: visible;
+    margin-top: 30px;
+    padding: 30px;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.1);
 }
 
 .medals-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 2vw;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 30px;
+    width: 100%;
+    justify-items: center;
+}
+
+.medals-grid a {
+    text-decoration: none;
+    display: block;
     width: 100%;
 }
 
@@ -117,47 +139,48 @@ body::-webkit-scrollbar {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 10px;
-    width: 100%;
+    gap: 15px;
+    padding: 10px;
+    transition: transform 0.3s;
 }
 
-.medals-grid a {
-    cursor: default;
-    text-decoration: none; 
-}
-
-.medal-item img,
-.medal-item p {
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.medal-item img:hover,
-.medal-item p:hover {
-    transform: scale(1.1);
-    transition: all 0.3s;
+.medal-item:hover {
+    transform: translateY(-5px);
 }
 
 .medal-item img {
-    width: clamp(40px, 5vw, 80px); 
+    width: 60px;
     height: auto;
+    filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5));
 }
 
-p.gold, p.silver, p.bronze {
-    font-weight: bold;
-    font-size: 1.2rem;
+.medal-item p {
+    font-size: 0.95rem;
+    line-height: 1.4;
     margin: 0;
-    text-align: center;
+    font-weight: 600;
 }
 
-p.gold {
-    color: #CDA434; 
-}
+p.gold { color: #FFD700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
+p.silver { color: #C0C0C0; text-shadow: 0 0 10px rgba(192, 192, 192, 0.3); }
+p.bronze { color: #CD7F32; text-shadow: 0 0 10px rgba(205, 127, 50, 0.3); }
 
-p.silver {
-    color: #c0c0c0; 
-}
 
-p.bronze {
-    color: #cd7f32; 
+@media (max-width: 768px) {
+    .main-layout {
+        padding-top: 100px;
+    }
+    
+    .skin-img {
+        height: 200px;
+    }
+    
+    .medals-grid {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 20px;
+    }
+
+    .player-row.active .medals-panel {
+        padding: 20px 10px;
+    }
 }

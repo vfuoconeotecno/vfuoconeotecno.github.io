@@ -1,29 +1,46 @@
+/* --- IMPOSTAZIONI GLOBALI PER IL CENTRAMENTO --- */
+html {
+    height: 100%; /* Assicura che la pagina sfrutti tutta l'altezza */
+}
+
 body { 
     font-family: 'Montserrat', sans-serif; 
     margin: 0;
+    
+    /* FLEXBOX STRUTTURALE: */
     display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    flex-direction: column; /* Impila Header - Container - Footer */
+    min-height: 100vh;      /* Il body è alto almeno quanto lo schermo */
+    
     background-image: url('../Immagini/Sfondi/Onorificenze.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover; 
     background-position: center center;
-    overflow-y: auto; 
+    overflow-x: hidden; /* Evita scroll orizzontale indesiderato */
 }
 
+/* --- CONTENITORE CENTRALE --- */
 .container {
     display: flex;
     align-items: center;
     justify-content: center;
+    
     width: 80%;
+    /* Altezza adattiva: minimo 400px, ideale 55% schermo, max 650px */
     height: clamp(400px, 55vh, 650px); 
-    margin: auto;
+    
+    /* CENTRAMENTO VERTICALE MAGICO: */
+    /* In un body flex-column, margin: auto spinge il box 
+       esattamente al centro dello spazio vuoto tra Header e Footer */
+    margin: auto; 
+    
     padding: 40px;
     box-sizing: border-box;
+    border-radius: 10px;
 }
 
-/* SFONDO MEDAGLIE */
+/* --- LOGICA TEMI (SFONDO) --- */
 .theme-light .container {
     background-color: rgba(214, 214, 214, 0.7);
     transition: all 0.3s;
@@ -38,8 +55,8 @@ body {
     background-color: rgba(105, 48, 48, 0.7);
     transition: all 0.3s;
 }
-/* SFONDO MEDAGLIE */
 
+/* --- SEZIONE IMMAGINI (SINISTRA/SOPRA) --- */
 .image-gallery-section {
     flex: 1;
     display: flex;
@@ -62,20 +79,10 @@ body {
     transition: color 1s ease-in-out; 
 }
 
-#medal-title-text.gold {
-    color: #CDA434;
-    transition: all 0.3s;
-}
-
-#medal-title-text.silver {
-    color: #c0c0c0;
-    transition: all 0.3s;
-}
-
-#medal-title-text.bronze {
-    color: #cd7f32;
-    transition: all 0.3s;
-}
+/* Colori Titolo */
+#medal-title-text.gold { color: #CDA434; transition: all 0.3s; }
+#medal-title-text.silver { color: #c0c0c0; transition: all 0.3s; }
+#medal-title-text.bronze { color: #cd7f32; transition: all 0.3s; }
 
 .medal-images-wrapper {
     width: clamp(150px, 20vw, 300px); 
@@ -98,6 +105,17 @@ body {
     opacity: 1;
 }
 
+/* --- SEZIONE DESCRIZIONE (DESTRA/SOTTO) --- */
+.description-section {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 40px;
+    border-left: 3px solid; /* Bordo laterale per desktop */
+    min-height: 250px;
+}
+
 .description-section p {
     font-size: clamp(1.1rem, 1.4vw, 1.4rem);
     line-height: 1.4;
@@ -105,37 +123,77 @@ body {
     font-style: italic;
 }
 
-.description-section {
-    flex: 1.2;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-left: 40px;
-    border-left: 3px solid;
-    min-height: 250px;
-}
-
-/* COLORE TESTO */
-.theme-light .description-section p {
-    color: #000;
-    transition: all 0.3s;
-}
-
+/* Colore Testo per Temi */
+.theme-light .description-section p { color: #000; transition: all 0.3s; }
 .theme-dark .description-section p,
-.theme-christmas .description-section p {
-    color: #f1f1f1;
-    transition: all 0.3s;
-}
-/* COLORE TESTO */
+.theme-christmas .description-section p { color: #f1f1f1; transition: all 0.3s; }
 
-.description-section.border-gold {
-    border-left-color: #CDA434; /* Oro */
-}
+/* Colore Bordo Laterale (Desktop) */
+.description-section.border-gold { border-left-color: #CDA434; }
+.description-section.border-silver { border-left-color: #c0c0c0; }
+.description-section.border-bronze { border-left-color: #cd7f32; }
 
-.description-section.border-silver {
-    border-left-color: #c0c0c0; /* Argento */
-}
 
-.description-section.border-bronze {
-    border-left-color: #cd7f32; /* Bronzo */
+/* --- VERSIONE MOBILE (Max 768px) --- */
+@media (max-width: 768px) {
+
+    .container {
+        flex-direction: column; /* Disposizione verticale */
+        width: 90%;
+        height: auto; /* L'altezza si adatta al contenuto */
+        
+        /* Margin auto centra verticalmente anche su mobile se c'è spazio, 
+           il 40px assicura che non tocchi Header/Footer se lo schermo è piccolo */
+        margin: 40px auto; 
+        
+        padding: 30px 20px;
+        gap: 20px;
+    }
+
+    .image-gallery-section {
+        width: 100%;
+        padding-right: 0;
+        flex: none;
+    }
+
+    .medal-images-wrapper {
+        width: 60vw;
+        height: 60vw;
+        max-width: 250px;
+        max-height: 250px;
+    }
+
+    #medal-title-text {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+    }
+
+    .description-section {
+        width: 100%;
+        padding-left: 0;
+        min-height: auto;
+        
+        /* Modifica Bordo: da verticale a orizzontale */
+        border-left: none;
+        border-top: 3px solid;
+        
+        padding-top: 25px;
+        text-align: center;
+    }
+
+    /* Colore Bordo Superiore (Mobile) */
+    .description-section.border-gold {
+        border-top-color: #CDA434;
+        border-left-color: transparent;
+    }
+
+    .description-section.border-silver {
+        border-top-color: #c0c0c0;
+        border-left-color: transparent;
+    }
+
+    .description-section.border-bronze {
+        border-top-color: #cd7f32;
+        border-left-color: transparent;
+    }
 }
