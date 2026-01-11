@@ -50,17 +50,124 @@
             </header>
 
             <div class="menu">☰</div>
-            
-            <div class="content"> 
-                <main class="main-content-wrapper"> 
-                    
-                    <div class="welcome-message">
-                        Coming Soon...
-                    </div>
-                    
-                </main>
+
+            <header class="video-hero">
+                <div class="hero-content">
+                    <h1>Guardaci come Lavoriamo</h1>
+                    <p>Ti invitiamo a guardare i video per vedere gli operatori del Corpo Nazionale all'opera!</p>
+                </div>
+            </header>
+
+            <div class="video-filters">
+                <button class="filter-btn active" data-filter="all">Tutti</button>
+                
+                <button class="filter-btn" data-filter="soccorsi">Soccorsi</button>
+                <button class="filter-btn" data-filter="incendi">Incendi</button>
+                <button class="filter-btn" data-filter="suicidi">Suicidi</button>
             </div>
-        
+
+            <section class="video-gallery">
+                
+                <article class="video-card" data-category="soccorsi">
+                    <div class="yt-lazy-load" data-id="dQw4w9WgXcQ">
+                        <div class="play-button"></div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-cat">Soccorsi</span>
+                        <h3>Salvataggio in extremis</h3>
+                        <p>Descrizione del video...</p>
+                    </div>
+                </article>
+
+                <article class="video-card" data-category="incendi">
+                    <div class="yt-lazy-load" data-id="dQw4w9WgXcQ">
+                        <div class="play-button"></div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-cat">Incendi</span>
+                        <h3>Rogo domato in centro</h3>
+                        <p>Descrizione del video...</p>
+                    </div>
+                </article>
+
+                <article class="video-card" data-category="suicidi">
+                    <div class="yt-lazy-load" data-id="dQw4w9WgXcQ">
+                        <div class="play-button"></div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-cat">Suicidi</span>
+                        <h3>Intervento di negoziazione</h3>
+                        <p>Descrizione del video...</p>
+                    </div>
+                </article>
+
+                                <article class="video-card" data-category="soccorsi">
+                    <div class="yt-lazy-load" data-id="dQw4w9WgXcQ">
+                        <div class="play-button"></div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-cat">Soccorsi</span>
+                        <h3>Salvataggio in extremis</h3>
+                        <p>Descrizione del video...</p>
+                    </div>
+                </article>
+
+                <article class="video-card" data-category="incendi">
+                    <div class="yt-lazy-load" data-id="dQw4w9WgXcQ">
+                        <div class="play-button"></div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-cat">Incendi</span>
+                        <h3>Rogo domato in centro</h3>
+                        <p>Descrizione del video...</p>
+                    </div>
+                </article>
+
+                <article class="video-card" data-category="suicidi">
+                    <div class="yt-lazy-load" data-id="dQw4w9WgXcQ">
+                        <div class="play-button"></div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-cat">Suicidi</span>
+                        <h3>Intervento di negoziazione</h3>
+                        <p>Descrizione del video...</p>
+                    </div>
+                </article>
+
+                                <article class="video-card" data-category="soccorsi">
+                    <div class="yt-lazy-load" data-id="dQw4w9WgXcQ">
+                        <div class="play-button"></div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-cat">Soccorsi</span>
+                        <h3>Salvataggio in extremis</h3>
+                        <p>Descrizione del video...</p>
+                    </div>
+                </article>
+
+                <article class="video-card" data-category="incendi">
+                    <div class="yt-lazy-load" data-id="dQw4w9WgXcQ">
+                        <div class="play-button"></div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-cat">Incendi</span>
+                        <h3>Rogo domato in centro</h3>
+                        <p>Descrizione del video...</p>
+                    </div>
+                </article>
+
+                <article class="video-card" data-category="suicidi">
+                    <div class="yt-lazy-load" data-id="dQw4w9WgXcQ">
+                        <div class="play-button"></div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-cat">Suicidi</span>
+                        <h3>Intervento di negoziazione</h3>
+                        <p>Descrizione del video...</p>
+                    </div>
+                </article>
+            </section>
+
             <footer class="main-footer">
                 <div class="footer-container">
                     <div class="footer-info">
@@ -79,6 +186,16 @@
                 </div>
             </footer>
             
+            <div id="videoModal" class="video-modal">
+                <div class="modal-content">
+                    <span class="close-btn">&times;</span>
+                    <div class="iframe-container">
+                        <iframe id="modalIframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            
             <script src="../Script/globale.js"></script>
+            <script src="../Script/yt.js"></script>
         </body>
 </html>
