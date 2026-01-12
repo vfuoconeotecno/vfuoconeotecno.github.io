@@ -436,10 +436,8 @@ body {
 
     .theme-light .monthly-report-table tbody tr:nth-child(n),
     .theme-christmas .monthly-report-table tbody tr:nth-child(n) { 
-        background-color: rgba(255, 255, 255, 0.75) !important;
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        border: 1px solid rgba(255, 255, 255, 0.6);
+        background-color: rgba(255, 255, 255, 0.65) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .theme-light .monthly-report-table td::before,
