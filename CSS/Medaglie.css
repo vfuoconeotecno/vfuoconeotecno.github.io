@@ -70,6 +70,9 @@ body {
     line-height: 1.2;
     transition: color 0.5s ease;
     word-wrap: break-word;
+    text-align: center; 
+    width: 100%;
+    display: block;
 }
 
 #medal-title-text.gold { color: #CDA434; }
@@ -137,8 +140,8 @@ body {
     }
 
     .image-gallery-section {
-        align-items: flex-end;
-        padding-right: 40px;
+        align-items: center;
+        padding-right: 0;
         width: 45%;
     }
 
