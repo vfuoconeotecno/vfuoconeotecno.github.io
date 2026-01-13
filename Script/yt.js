@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const videoId = overlay.getAttribute('data-id');
         
         if (videoId) {
-            overlay.style.backgroundImage = `url('https://img.youtube.com/vi/${videoId}/maxresdefault.jpg')`;
+            overlay.style.backgroundImage = `url('https://img.youtube.com/vi/${videoId}/hqdefault.jpg')`;
         }
 
         overlay.addEventListener('click', function() {
