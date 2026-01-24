@@ -35,6 +35,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuIcon = document.querySelector('.menu');
     const navContainer = document.querySelector('.main-nav-desktop'); 
     const body = document.body;
+
+    window.addEventListener('scroll', () => {
+        if (body.classList.contains('menu-open')) return;
+
+        if (window.scrollY > 10) {
+            if (menuIcon) menuIcon.classList.add('hide-trigger');
+        } else {
+            if (menuIcon) menuIcon.classList.remove('hide-trigger');
+        }
+    });
     
     if (menuIcon) {
         menuIcon.addEventListener('click', (event) => {
@@ -52,9 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     document.addEventListener('click', (event) => {
         if (body.classList.contains('menu-open')) {
-            
             if (navContainer && !navContainer.contains(event.target)) {
-                
                 body.classList.remove('menu-open');
                 body.style.overflowY = 'scroll';
             }
