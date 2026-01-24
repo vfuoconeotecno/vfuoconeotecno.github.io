@@ -352,13 +352,22 @@ const FooterHTML = `
         <div class="footer-info">
             &copy; <span id="current-year"></span> Vigili del Fuoco di Neotecno
         </div>
-        <div class="footer-links">
-            <a href="https://t.me/percherespiro">Contatti</a>
-            <span>|</span>
-            <a href="https://t.me/VFuocoNeoTecno">Canale Ufficiale</a>
-            <span>|</span>
-            <a href="https://discord.gg/V5aXAnxwWW">Discord</a>
+
+        <div class="footer-center">
+            <div class="footer-links">
+                <a href="https://t.me/percherespiro">Contatti</a>
+                <span>|</span>
+                <a href="https://t.me/VFuocoNeoTecno">Canale Ufficiale</a>
+                <span>|</span>
+                <a href="https://discord.gg/V5aXAnxwWW">Discord</a>
+            </div>
+            <div class="footer-legal">
+                <a href="${root}Privacy/PrivacyPolicy.html">Privacy Policy</a>
+                <a href="${root}Privacy/CookiePolicy.html">Cookie Policy</a>
+                <a href="${root}Privacy/Disclaimer.html">Disclaimer</a>
+            </div>
         </div>
+
         <div class="footer-credits">
             Developer: Nicolò Cavalieri
         </div>

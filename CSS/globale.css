@@ -387,8 +387,20 @@ body.page-leaving .theme-switcher button img {
     text-align: left;
 }
 
+.footer-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-legal {
+    font-size: 0.9rem;
+}
+
 /* LINK FOOTER */
-.theme-light .footer-links a {
+.theme-light .footer-links a,
+.theme-light .footer-legal a {
     color: #131313;
     text-decoration: none;
     padding: 0 10px;
@@ -396,22 +408,27 @@ body.page-leaving .theme-switcher button img {
 }
 
 .theme-dark .footer-links a,
-.theme-christmas .footer-links a {
+.theme-dark .footer-legal a,
+.theme-christmas .footer-links a,
+.theme-christmas .footer-legal a {
     color: #f1f1f1;
     text-decoration: none;
     padding: 0 10px;
     transition: color 0.3s;
 }
 
-.theme-light .footer-links a:hover {
+.theme-light .footer-links a:hover,
+.theme-light .footer-legal a:hover {
     color: #af3745;
 }
 
-.theme-dark .footer-links a:hover {
+.theme-dark .footer-links a:hover,
+.theme-dark .footer-legal a:hover {
     color: #af3745;
 }
 
-.theme-christmas .footer-links a:hover {
+.theme-christmas .footer-links a:hover,
+.theme-christmas .footer-legal a:hover {
     color: #410000;
 }
 /* LINK FOOTER */
