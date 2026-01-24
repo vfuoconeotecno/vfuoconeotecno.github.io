@@ -310,46 +310,64 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 });
 
-function initPageEvents() {
-    // Qui metti il codice del tuo menu a tendina
-    const menuBtn = document.querySelector('.menu');
-    if (menuBtn) {
-        menuBtn.addEventListener('click', () => {
-            // ... tuo codice menu ...
-        });
-    }
+const root = window.pathPrefix || ""; 
+const pageName = window.pageTitle || "Home";
+const HeaderHTML = `
+<header class="main-header">
+    <div class="header-top">
+        <div class="logo">
+            <a href="${root}index.html"><img src="${root}Logo/Logo.png" alt="Logo VdF"></a>
+        </div>
+        <div class="header-title">
+            Vigili del Fuoco di Neotecno » ${pageName}
+        </div>
+        <div class="header-right-controls">
+            <div class="theme-switcher">
+                <button id="theme-light"><img src="${root}Immagini/Light.png"></button>
+                <button id="theme-dark"><img src="${root}Immagini/Dark.png"></button>
+                <button id="theme-christmas"><img src="${root}Immagini/Natale.png"></button>
+            </div>
+        </div>
+    </div>
+    <div class="header-bottom">
+        <nav class="main-nav-desktop">
+            <ul>
+                <li><a href="${root}index.html"><img src="${root}Immagini/Casa.png"></a></li>
+                <li><a href="${root}Gerarchia/Gerarchia.html">PERSONALE</a></li>
+                <li><a href="${root}Regolamento/Regolamento.html">REGOLAMENTO</a></li>
+                <li><a href="${root}Onorificenze/Onorificenze.html">ONORIFICENZE</a></li>
+                <li><a href="${root}Resoconto/Resoconto.html">RESOCONTO</a></li>
+                <li><a href="${root}Bacheca/Bacheca.html">BACHECA</a></li>
+                <li><a href="${root}Guardaci/Guardaci.html">GUARDACI</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<div class="menu">☰</div>
+`;
 
-    // Qui metti il codice dei temi (se c'è)
-    const themeBtn = document.getElementById('theme-light');
-    if (themeBtn) {
-        // ... tuo codice temi ...
-    }
-}
+const FooterHTML = `
+<footer class="main-footer">
+    <div class="footer-container">
+        <div class="footer-info">
+            &copy; <span id="current-year"></span> Vigili del Fuoco di Neotecno
+        </div>
+        <div class="footer-links">
+            <a href="https://t.me/percherespiro">Contatti</a>
+            <span>|</span>
+            <a href="https://t.me/VFuocoNeoTecno">Canale Ufficiale</a>
+            <span>|</span>
+            <a href="https://discord.gg/V5aXAnxwWW">Discord</a>
+        </div>
+        <div class="footer-credits">
+            Developer: Nicolò Cavalieri
+        </div>
+    </div>
+</footer>
+`;
 
-// 2. Funzione per caricare i componenti
-function loadComponent(id, file) {
-    fetch(file)
-        .then(response => {
-            if (!response.ok) throw new Error("Errore nel caricamento");
-            return response.text();
-        })
-        .then(data => {
-            document.getElementById(id).innerHTML = data;
+document.getElementById('header-placeholder').innerHTML = HeaderHTML;
+document.getElementById('footer-placeholder').innerHTML = FooterHTML;
 
-            // Se abbiamo caricato l'header, ora possiamo attivare i bottoni!
-            if (file.includes('header.html')) {
-                initPageEvents(); // <--- IMPORTANTE: Avvia gli script del menu ora
-            }
-            
-            // Se abbiamo caricato il footer, aggiorniamo l'anno
-            if (file.includes('footer.html')) {
-                const yearSpan = document.getElementById("current-year");
-                if(yearSpan) yearSpan.innerText = new Date().getFullYear();
-            }
-        })
-        .catch(error => console.error('Errore:', error));
-}
-
-// 3. Avvia il caricamento
-loadComponent('header-placeholder', 'HeaderFooter/header.html');
-loadComponent('footer-placeholder', 'HeaderFooter/footer.html');
+const yearSpan = document.getElementById("current-year");
+if(yearSpan) yearSpan.innerText = new Date().getFullYear();
